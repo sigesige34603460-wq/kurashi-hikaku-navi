@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 24px;
+  border-bottom: 0.5px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoMark {
+  width: 28px;
+  height: 28px;
+  background: var(--green);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoName {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.logoName em {
+  color: var(--green);
+  font-style: normal;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.nav a {
+  transition: color 0.15s;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: var(--green);
+  font-weight: 500;
+}

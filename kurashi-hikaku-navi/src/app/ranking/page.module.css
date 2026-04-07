@@ -1,0 +1,227 @@
+.main {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.pageHead {
+  padding: 28px 24px 20px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--green-light);
+  color: var(--green-darker);
+  border-radius: 20px;
+  padding: 3px 12px;
+  margin-bottom: 10px;
+}
+
+.h1 { font-size: 20px; font-weight: 500; margin-bottom: 6px; }
+.lead { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+.tabs {
+  display: flex;
+  border-bottom: 0.5px solid var(--border);
+  overflow-x: auto;
+  padding: 0 24px;
+}
+
+.tab {
+  padding: 11px 16px;
+  font-size: 12px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.tabOn {
+  border-bottom-color: var(--green);
+  color: var(--green);
+  font-weight: 500;
+}
+
+.weights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 24px;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--surface);
+  align-items: center;
+}
+
+.weightsLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-right: 4px;
+}
+
+.wRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  width: 44px;
+  flex-shrink: 0;
+}
+
+.wSlider {
+  width: 64px;
+  accent-color: var(--green);
+}
+
+.wVal {
+  font-size: 11px;
+  font-weight: 500;
+  width: 20px;
+}
+
+.rankList {
+  padding: 0 24px;
+}
+
+.rankHead {
+  display: grid;
+  grid-template-columns: 28px 1fr 60px 60px 60px 60px 52px;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--text-muted);
+  padding: 10px 4px 6px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.rankRow {
+  display: grid;
+  grid-template-columns: 28px 1fr 60px 60px 60px 60px 52px;
+  gap: 4px;
+  align-items: center;
+  padding: 10px 4px;
+  border-bottom: 0.5px solid var(--border);
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.1s;
+}
+
+.rankRow:last-child { border-bottom: none; }
+.rankRow:hover { background: var(--surface); border-radius: 8px; }
+.rankRowSelected { background: var(--green-light) !important; border-radius: 8px !important; }
+
+.rankNum { font-size: 12px; font-weight: 500; text-align: center; }
+.g1 { color: #B8860B; }
+.g2 { color: #888780; }
+.g3 { color: #854F0B; }
+
+.cityName { font-size: 13px; font-weight: 500; }
+.cityPref { font-size: 10px; color: var(--text-muted); }
+
+.scoreCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-end;
+}
+
+.scoreBarBg {
+  width: 44px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.scoreBarFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.scoreNum { font-size: 10px; color: var(--text-muted); }
+.totalScore { font-size: 14px; font-weight: 500; text-align: right; }
+
+.detail {
+  margin: 16px 24px;
+  padding: 16px;
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.detailHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.detailName { font-size: 16px; font-weight: 500; }
+.detailScore { font-size: 13px; color: var(--green); font-weight: 500; }
+
+.detailReasons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reason {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 10px;
+  background: var(--surface);
+  border-radius: 9px;
+}
+
+.reasonIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.reasonTitle { font-size: 12px; font-weight: 500; margin-bottom: 2px; }
+.reasonDesc { font-size: 11px; color: var(--text-muted); line-height: 1.6; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 24px;
+  border-top: 0.5px solid var(--border);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.footer {
+  padding: 14px 24px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  border-top: 0.5px solid var(--border);
+}
