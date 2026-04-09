@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Header from '@/components/Header'
 import { simCities, whyData } from '@/data/cities'
+import Link from 'next/link'
 import styles from './page.module.css'
 
 const FROM_OPTIONS = [
@@ -175,9 +176,9 @@ export default function Home() {
           </div>
           <div className={styles.cityCards}>
             {[
-              { name: '福岡市', pref: '福岡県', saving: '月4.2万円', sub: '年50万円以上の節約', badge: '都市機能◎', badgeType: 'green' },
-              { name: '宮崎市', pref: '宮崎県', saving: '月5.8万円', sub: '年70万円以上の節約', badge: '自然豊か', badgeType: 'amber' },
-              { name: '前橋市', pref: '群馬県', saving: '月5.6万円', sub: '新幹線で東京へ1時間', badge: '東京通勤可', badgeType: 'green' },
+              { id: 'fukuoka', name: '福岡市', pref: '福岡県', saving: '月4.2万円', sub: '年50万円以上の節約', badge: '都市機能◎', badgeType: 'green' },
+              { id: 'miyazaki', name: '宮崎市', pref: '宮崎県', saving: '月5.8万円', sub: '年70万円以上の節約', badge: '自然豊か', badgeType: 'amber' },
+              { id: 'maebashi', name: '前橋市', pref: '群馬県', saving: '月5.6万円', sub: '新幹線で東京へ1時間', badge: '東京通勤可', badgeType: 'green' },
             ].map((c, i) => (
               <div key={i} className={styles.cityCard}>
                 <div className={styles.cityCardTop}>
@@ -186,6 +187,7 @@ export default function Home() {
                 </div>
                 <div className={styles.cityCardSaving}>{c.saving}</div>
                 <div className={styles.cityCardSub}>{c.sub}</div>
+              <Link href={`/cities/${c.id}`} className={styles.cityCardLink}>詳しく見る →</Link>
               </div>
             ))}
           </div>
