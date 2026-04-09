@@ -1,4 +1,4 @@
-'use client'
+'use client' // v2
 import { useState } from 'react'
 import Header from '@/components/Header'
 import { simCities, whyData } from '@/data/cities'
