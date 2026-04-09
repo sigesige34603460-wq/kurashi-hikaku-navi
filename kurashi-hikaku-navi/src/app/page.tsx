@@ -214,7 +214,20 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className={styles.footer}>
+        {/* アフィリエイトバナー */}
+        <section style={{maxWidth:'480px',margin:'0 auto',padding:'0 16px 32px'}}>
+          <p style={{fontSize:'13px',color:'#888',textAlign:'center',marginBottom:'10px'}}>移住準備に役立つサービス</p>
+          <a href="https://hikkoshi.suumo.jp/" target="_blank" rel="noopener noreferrer sponsored" style={{display:'block',background:'#E8F5E9',border:'1px solid #4CAF50',borderRadius:'10px',padding:'14px 16px',marginBottom:'10px',textDecoration:'none',color:'#222'}}>
+            <div style={{fontWeight:700,fontSize:'14px',marginBottom:'4px'}}>引越し費用を最大50%節約！</div>
+            <div style={{fontSize:'12px',color:'#555',marginBottom:'8px'}}>SUUMO引越しで最大10社から一括見積もり。</div>
+            <div style={{fontSize:'13px',fontWeight:600,color:'#1565C0'}}>無料で見積もりを比較する →</div>
+          </a>
+          <a href="https://suumo.jp/chintai/" target="_blank" rel="noopener noreferrer sponsored" style={{display:'block',background:'#E3F2FD',border:'1px solid #2196F3',borderRadius:'10px',padding:'14px 16px',textDecoration:'none',color:'#222'}}>
+            <div style={{fontWeight:700,fontSize:'14px',marginBottom:'4px'}}>移住先の賃貸物件を探す</div>
+            <div style={{fontSize:'12px',color:'#555',marginBottom:'8px'}}>全国の賃貸物件を検索。地方の格安物件も充実。</div>
+            <div style={{fontSize:'13px',fontWeight:600,color:'#1565C0'}}>賃貸物件を検索する →</div>
+          </a>
+        </section>footer className={styles.footer}>
           データ出典：総務省「消費者物価地域差指数」「家計調査」· © 2025 くらし比較ナビ
         </footer>
       </main>
