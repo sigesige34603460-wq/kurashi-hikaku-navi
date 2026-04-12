@@ -20,45 +20,76 @@ export default function CityPage({ params }: Props) {
     cost: '💰', conv: '🚃', nat: '🌿', med: '🏥'
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* ヘッダー */}
-      <header className="bg-white border-b sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-3">
-          <Link href="/" className="text-blue-600 hover:underline text-sm">← トップに戻る</Link>
-          <span className="text-gray-400">|</span>
-          <span className="font-bold text-gray-800">{city.name}（{city.pref}）</span>
-        </div>
-      </header>
+  const scoreItems = [
+    { label: '生活コスト', value: rank?.cost ?? 0, color: '#2D6A4F' },
+    { label: '利便性',     value: rank?.conv ?? 0, color: '#52B788' },
+    { label: '自然環境',   value: rank?.nat  ?? 0, color: '#1B4332' },
+    { label: '医療',       value: rank?.med  ?? 0, color: '#7C5C3A' },
+  ]
 
-      <main className="max-w-4xl mx-auto px-4 py-8 space-y-8">
+  return (
+    <div style={{ minHeight: '100vh', background: 'var(--green-pale)' }}>
+
+      {/* サブヘッダー（パンくず） */}
+      <div style={{
+        background: 'var(--white)',
+        borderBottom: '1px solid var(--border)',
+        position: 'sticky', top: 56, zIndex: 90,
+      }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '10px 20px', display: 'flex', alignItems: 'center', gap: 8, fontSize: 13 }}>
+          <Link href="/" style={{ color: 'var(--green)', fontWeight: 600 }}>← トップ</Link>
+          <span style={{ color: 'var(--text-light)' }}>/</span>
+          <span style={{ color: 'var(--text-muted)' }}>{city.name}（{city.pref}）</span>
+        </div>
+      </div>
+
+      <main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 20px 48px', display: 'flex', flexDirection: 'column', gap: 20 }}>
 
         {/* ヒーロー */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-400 rounded-2xl p-8 text-white">
-          <p className="text-blue-100 text-sm mb-1">{city.pref}</p>
-          <h1 className="text-3xl font-bold mb-3">{city.name}</h1>
-          <p className="text-blue-50 text-lg leading-relaxed">{city.catchcopy}</p>
+        <div style={{
+          background: 'linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, var(--green-mid) 100%)',
+          borderRadius: 'var(--radius-xl)',
+          padding: '36px 28px',
+          color: '#fff',
+          position: 'relative',
+          overflow: 'hidden',
+          boxShadow: 'var(--shadow-lg)',
+        }}>
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'radial-gradient(ellipse at 80% 10%, rgba(255,255,255,0.07) 0%, transparent 55%)',
+            pointerEvents: 'none',
+          }} />
+          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', marginBottom: 6, letterSpacing: '0.08em' }}>
+            {city.pref}
+          </p>
+          <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 12, textShadow: '0 1px 4px rgba(0,0,0,0.2)' }}>
+            {city.name}
+          </h1>
+          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.88)', lineHeight: 1.75 }}>
+            {city.catchcopy}
+          </p>
         </div>
 
-        {/* スコア */}
+        {/* 住みやすさスコア */}
         {rank && (
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">📊 住みやすさスコア</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { label: '生活コスト', value: rank.cost, color: 'bg-green-500' },
-                { label: '利便性', value: rank.conv, color: 'bg-blue-500' },
-                { label: '自然環境', value: rank.nat, color: 'bg-emerald-500' },
-                { label: '医療', value: rank.med, color: 'bg-red-500' },
-              ].map(item => (
-                <div key={item.label} className="text-center">
-                  <div className="text-3xl font-bold text-gray-800 mb-1">{item.value}</div>
-                  <div className="text-xs text-gray-500 mb-2">{item.label}</div>
-                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full ${item.color} rounded-full`}
-                      style={{ width: `${item.value}%` }}
-                    />
+          <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
+            <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 18 }}>📊 住みやすさスコア</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              {scoreItems.map(item => (
+                <div key={item.label}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 6 }}>
+                    <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{item.label}</span>
+                    <span style={{ fontSize: 20, fontWeight: 800, color: item.color }}>{item.value}</span>
+                  </div>
+                  <div style={{ height: 8, background: 'var(--green-light)', borderRadius: 100, overflow: 'hidden' }}>
+                    <div style={{
+                      height: '100%',
+                      width: `${item.value}%`,
+                      background: item.color,
+                      borderRadius: 100,
+                      transition: 'width 0.6s ease',
+                    }} />
                   </div>
                 </div>
               ))}
@@ -66,17 +97,22 @@ export default function CityPage({ params }: Props) {
           </div>
         )}
 
-        {/* 移住のポイント */}
+        {/* 移住するメリット */}
         {why.length > 0 && (
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">✅ 移住するメリット</h2>
-            <div className="grid md:grid-cols-2 gap-4">
+          <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
+            <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>✅ 移住するメリット</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {why.map((w, i) => (
-                <div key={i} className="flex gap-3 p-4 bg-blue-50 rounded-xl">
-                  <span className="text-2xl">{iconMap[w.icon] ?? '📌'}</span>
+                <div key={i} style={{
+                  display: 'flex', gap: 12, padding: '14px 12px',
+                  background: 'var(--green-pale)',
+                  border: '1.5px solid var(--border)',
+                  borderRadius: 'var(--radius-md)',
+                }}>
+                  <span style={{ fontSize: 24, flexShrink: 0 }}>{iconMap[w.icon] ?? '📌'}</span>
                   <div>
-                    <div className="font-semibold text-gray-800 text-sm mb-1">{w.title}</div>
-                    <div className="text-gray-600 text-xs leading-relaxed">{w.desc}</div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>{w.title}</div>
+                    <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.65 }}>{w.desc}</div>
                   </div>
                 </div>
               ))}
@@ -85,31 +121,42 @@ export default function CityPage({ params }: Props) {
         )}
 
         {/* ご当地グルメ */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">🍜 ご当地グルメ</h2>
-          <div className="grid md:grid-cols-2 gap-3">
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>🍜 ご当地グルメ</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {city.gourmet.map((g, i) => (
-              <div key={i} className="flex gap-3 p-4 border border-gray-100 rounded-xl hover:bg-orange-50 transition-colors">
-                <span className="text-2xl">🍽️</span>
+              <div key={i} style={{
+                display: 'flex', gap: 10, padding: '12px',
+                border: '1.5px solid var(--border)',
+                borderRadius: 'var(--radius-md)',
+                background: 'var(--earth-pale)',
+                transition: 'border-color 0.15s',
+              }}>
+                <span style={{ fontSize: 22, flexShrink: 0 }}>🍽️</span>
                 <div>
-                  <div className="font-semibold text-gray-800 text-sm mb-1">{g.name}</div>
-                  <div className="text-gray-500 text-xs leading-relaxed">{g.desc}</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 3 }}>{g.name}</div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.65 }}>{g.desc}</div>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* 観光・おすすめスポット */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">📍 おすすめスポット</h2>
-          <div className="grid md:grid-cols-2 gap-3">
+        {/* おすすめスポット */}
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>📍 おすすめスポット</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {city.spots.map((s, i) => (
-              <div key={i} className="flex gap-3 p-4 border border-gray-100 rounded-xl hover:bg-green-50 transition-colors">
-                <span className="text-2xl">🗺️</span>
+              <div key={i} style={{
+                display: 'flex', gap: 10, padding: '12px',
+                border: '1.5px solid var(--border)',
+                borderRadius: 'var(--radius-md)',
+                background: 'var(--green-pale)',
+              }}>
+                <span style={{ fontSize: 22, flexShrink: 0 }}>🗺️</span>
                 <div>
-                  <div className="font-semibold text-gray-800 text-sm mb-1">{s.name}</div>
-                  <div className="text-gray-500 text-xs leading-relaxed">{s.desc}</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 3 }}>{s.name}</div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.65 }}>{s.desc}</div>
                 </div>
               </div>
             ))}
@@ -117,27 +164,46 @@ export default function CityPage({ params }: Props) {
         </div>
 
         {/* 移住のコツ */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">💡 移住のコツ</h2>
-          <ul className="space-y-3">
+        <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>💡 移住のコツ</h2>
+          <ul style={{ display: 'flex', flexDirection: 'column', gap: 12, listStyle: 'none', padding: 0, margin: 0 }}>
             {city.tips.map((tip, i) => (
-              <li key={i} className="flex gap-3 items-start">
-                <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+              <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                <span style={{
+                  width: 24, height: 24, borderRadius: '50%',
+                  background: 'var(--green-light)',
+                  color: 'var(--green-dark)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: 11, fontWeight: 800, flexShrink: 0, marginTop: 1,
+                }}>
                   {i + 1}
                 </span>
-                <span className="text-gray-700 text-sm leading-relaxed">{tip}</span>
+                <span style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.75 }}>{tip}</span>
               </li>
             ))}
           </ul>
         </div>
 
         {/* CTA */}
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 text-center">
-          <p className="text-gray-600 mb-4">他の都市と比較してみましょう</p>
-          <Link
-            href="/"
-            className="inline-block bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors"
-          >
+        <div style={{
+          background: 'linear-gradient(135deg, var(--green-light) 0%, var(--green-pale) 100%)',
+          border: '1.5px solid rgba(45,106,79,0.2)',
+          borderRadius: 'var(--radius-xl)',
+          padding: '28px 20px',
+          textAlign: 'center',
+        }}>
+          <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 16 }}>他の都市と比較してみましょう</p>
+          <Link href="/" style={{
+            display: 'inline-block',
+            background: 'linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%)',
+            color: '#fff',
+            padding: '12px 32px',
+            borderRadius: 'var(--radius-md)',
+            fontWeight: 700,
+            fontSize: 14,
+            boxShadow: '0 4px 12px rgba(45,106,79,0.35)',
+            transition: 'transform 0.15s',
+          }}>
             ← 都市比較トップへ
           </Link>
         </div>
