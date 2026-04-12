@@ -271,7 +271,7 @@ export default function CityPage({ params }: Props) {
                     Google マップ
                   </a>
                   <a
-                    href={`https://www.jalan.net/kankou/${jalanPref}/?keyword=${encodeURIComponent(s.name)}`}
+                    href={`https://www.google.com/search?q=${encodeURIComponent('じゃらん観光 ' + s.name)}`}
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     style={{
