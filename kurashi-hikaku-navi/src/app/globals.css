@@ -1,49 +1,57 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* ===== リセット ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ===== デザイントークン（里山テーマ） ===== */
+:root {
+  /* グリーン系（深い森〜新緑） */
+  --green:         #2D6A4F;
+  --green-dark:    #1B4332;
+  --green-darker:  #0D2818;
+  --green-mid:     #52B788;
+  --green-light:   #D8F3DC;
+  --green-pale:    #F0FAF2;
+
+  /* アース系（大地・木肌） */
+  --earth:         #7C5C3A;
+  --earth-light:   #F4E4C1;
+  --earth-pale:    #FAF3E8;
+
+  /* スカイ系（空・川） */
+  --sky:           #ADE8F4;
+  --sky-dark:      #0077B6;
+
+  /* テキスト */
+  --text:          #1B2D1F;
+  --text-muted:    #5C7A5E;
+  --text-light:    #8A9E8C;
+
+  /* UI */
+  --border:        rgba(45, 106, 79, 0.15);
+  --surface:       #F5F9F5;
+  --white:         #ffffff;
+
+  /* 角丸 */
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  20px;
+  --radius-xl:  28px;
+
+  /* シャドウ */
+  --shadow-sm: 0 2px 8px rgba(27, 67, 50, 0.08);
+  --shadow-md: 0 4px 20px rgba(27, 67, 50, 0.12);
+  --shadow-lg: 0 8px 32px rgba(27, 67, 50, 0.16);
 }
 
-:root {
-  --green: #1D9E75;
-  --green-dark: #0F6E56;
-  --green-darker: #085041;
-  --green-light: #E1F5EE;
-  --blue-light: #E6F1FB;
-  --blue-dark: #0C447C;
-  --amber-light: #FAEEDA;
-  --amber-dark: #633806;
-  --text: #1a1a1a;
-  --text-muted: #6b7280;
-  --border: rgba(0, 0, 0, 0.12);
-  --surface: #f9f9f8;
-  --white: #ffffff;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-}
+/* ===== ベース ===== */
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  background-color: var(--green-pale);
   color: var(--text);
-  background: var(--white);
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  cursor: pointer;
-  font-family: inherit;
-}
-
-select {
-  font-family: inherit;
-}
-
-input {
-  font-family: inherit;
-}
+a    { color: inherit; text-decoration: none; cursor: pointer; }
+button, input, select { font: inherit; cursor: pointer; }
