@@ -342,6 +342,47 @@ export default function CityPage({ params }: Props) {
           </div>
         </div>
 
+        {/* 補助金・移住支援金 */}
+        {city.subsidies && city.subsidies.length > 0 && (
+          <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid rgba(124,92,58,0.25)' }}>
+            <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>💴 補助金・移住支援金</h2>
+            <p style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 16 }}>※金額・条件は変更になる場合があります。最新情報は各公式サイトでご確認ください。</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {city.subsidies.map((s, i) => (
+                <div key={i} style={{
+                  padding: '16px',
+                  background: 'var(--earth-pale)',
+                  border: '1.5px solid rgba(124,92,58,0.2)',
+                  borderRadius: 'var(--radius-md)',
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8, marginBottom: 6 }}>
+                    <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', flex: 1 }}>{s.title}</span>
+                    <span style={{
+                      fontSize: 13, fontWeight: 800, color: 'var(--earth)',
+                      background: '#fff', padding: '2px 10px', borderRadius: 100,
+                      border: '1.5px solid rgba(124,92,58,0.3)', whiteSpace: 'nowrap', flexShrink: 0,
+                    }}>{s.amount}</span>
+                  </div>
+                  <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 10 }}>{s.desc}</p>
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-block', fontSize: 11, fontWeight: 600,
+                      color: 'var(--green-dark)', padding: '5px 12px',
+                      background: 'var(--green-light)', borderRadius: 6,
+                      border: '1px solid rgba(45,106,79,0.2)', textDecoration: 'none',
+                    }}
+                  >
+                    公式サイトで詳しく見る →
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* 移住のコツ */}
         <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
           <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>💡 移住のコツ</h2>

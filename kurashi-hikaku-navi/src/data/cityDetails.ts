@@ -1,3 +1,10 @@
+export interface Subsidy {
+  title: string       // 制度名
+  amount: string      // 金額・支給額
+  desc: string        // 概要
+  url: string         // 詳細URL
+}
+
 export interface CityDetail {
   id: string
   name: string
@@ -6,6 +13,7 @@ export interface CityDetail {
   gourmet: { name: string; desc: string }[]
   spots: { name: string; desc: string }[]
   tips: string[]
+  subsidies: Subsidy[]
 }
 
 export const cityDetails: Record<string, CityDetail> = {
@@ -30,6 +38,11 @@ export const cityDetails: Record<string, CityDetail> = {
       '屋台は年中営業。深夜の「屋台めぐり」が福岡暮らしの定番',
       '福岡市民は気さくで人懐っこく、移住者が馴染みやすい雰囲気',
     ],
+    subsidies: [
+      { title: '福岡県移住支援金', amount: '最大100万円', desc: '東京23区からの移住者が対象。単身最大60万円、世帯最大100万円を支給。就業・テレワーク条件あり。', url: 'https://www.pref.fukuoka.lg.jp/contents/ijyu-shienkin.html' },
+      { title: '福岡市子育て支援', amount: '各種補助', desc: '保育料無償化（3〜5歳）、子ども医療費助成（中学3年まで）など子育て世帯への支援が充実。', url: 'https://www.city.fukuoka.lg.jp/kodomo/' },
+      { title: '空き家活用リノベーション補助', amount: '最大100万円', desc: '福岡市内の空き家を取得・リノベーションして居住する場合に工事費の一部を補助。', url: 'https://www.city.fukuoka.lg.jp/jutaku-toshi/' },
+    ],
   },
   sendai: {
     id: 'sendai', name: '仙台市', pref: '宮城県',
@@ -51,6 +64,11 @@ export const cityDetails: Record<string, CityDetail> = {
       '冬の雪対策としてスタッドレスタイヤの準備が必須',
       '秋の「仙台コレクション」など大型イベントが年間通じて多彩',
       '牛タン・笹かまぼこなど地元ブランド食材が日常的に安く手に入る',
+    ],
+    subsidies: [
+      { title: '宮城県移住支援金', amount: '最大100万円', desc: '東京圏からの移住者が対象。単身最大60万円、世帯最大100万円。就業・テレワーク要件あり。', url: 'https://www.pref.miyagi.jp/soshiki/chiiki/iju-shienkin.html' },
+      { title: '仙台市住宅取得補助', amount: '最大50万円', desc: '市内に新たに住宅を取得した子育て世帯を対象とした補助金制度。条件により加算あり。', url: 'https://www.city.sendai.jp/jutaku/' },
+      { title: '仙台市子育て医療費助成', amount: '自己負担ゼロ', desc: '中学3年生まで医療費の自己負担分を全額助成。安心して子育てできる環境を提供。', url: 'https://www.city.sendai.jp/kodomo/' },
     ],
   },
   hiroshima: {
@@ -74,6 +92,11 @@ export const cityDetails: Record<string, CityDetail> = {
       '路面電車が市内をくまなく走り、車なしでも十分生活できる',
       '牡蠣の旬（10〜3月）は地元の魚市場やスーパーで驚くほど安く買える',
     ],
+    subsidies: [
+      { title: '広島県移住支援金', amount: '最大100万円', desc: '東京圏からの移住就業・テレワーク移住者が対象。単身60万円、世帯100万円を支給。', url: 'https://www.pref.hiroshima.lg.jp/soshiki/270/ijushienkin.html' },
+      { title: '広島市空き家バンク補助', amount: '最大60万円', desc: '空き家バンクを活用して市内に移住した場合、リフォーム費用の一部を補助。', url: 'https://www.city.hiroshima.lg.jp/site/akiyabank/' },
+      { title: '広島県子育て応援パスポート', amount: '各種割引', desc: '18歳未満の子どもがいる家庭に協賛店での割引・優待サービスを提供。', url: 'https://www.pref.hiroshima.lg.jp/soshiki/249/koe-passport.html' },
+    ],
   },
   nagano: {
     id: 'nagano', name: '長野市', pref: '長野県',
@@ -95,6 +118,11 @@ export const cityDetails: Record<string, CityDetail> = {
       '夏は涼しく避暑地として非常に快適。移住者が急増中',
       '長野市の郊外は自然豊かで家庭菜園や田舎暮らしを楽しむ方に人気',
       '長野市内の移住サポート窓口に相談すると地元の移住コミュニティを紹介してくれる',
+    ],
+    subsidies: [
+      { title: '長野県移住支援金', amount: '最大100万円', desc: '東京圏からの移住者が対象。単身60万円、世帯100万円。18歳未満の子ども1人につき最大100万円加算。', url: 'https://www.pref.nagano.lg.jp/kanko/iju/shienkin.html' },
+      { title: '長野市移住促進助成金', amount: '最大30万円', desc: '市外から長野市に転入し、定住する意志がある方への移住促進助成。住宅取得・賃借費用を補助。', url: 'https://www.city.nagano.nagano.jp/site/iju/' },
+      { title: '長野県農業次世代人材投資資金', amount: '最大150万円/年', desc: '農業経営開始から5年以内の農業者に年間最大150万円を支給。就農移住者に手厚い支援。', url: 'https://www.pref.nagano.lg.jp/nogi/shien/shienkin.html' },
     ],
   },
   miyazaki: {
@@ -118,6 +146,11 @@ export const cityDetails: Record<string, CityDetail> = {
       '日照時間が全国トップクラスで洗濯物がよく乾く暮らしやすさ',
       '宮崎市は移住支援が手厚く、地元コミュニティに溶け込みやすい雰囲気',
     ],
+    subsidies: [
+      { title: '宮崎県移住支援金', amount: '最大100万円', desc: '東京圏からの就業・テレワーク移住者が対象。単身60万円、世帯100万円。子ども加算あり。', url: 'https://www.pref.miyazaki.lg.jp/chiikisei/kurashi/ijuu/index.html' },
+      { title: '宮崎市移住定住推進補助金', amount: '最大50万円', desc: '市内に定住する意向で転入した方への補助。住宅取得・リフォーム・家賃費用を一部補助。', url: 'https://www.city.miyazaki.miyazaki.jp/kurashi/ijuu/' },
+      { title: '宮崎県ワーケーション支援', amount: '交通費補助等', desc: '宮崎でのワーケーション体験を経て移住した方への交通費・滞在費補助制度。', url: 'https://www.pref.miyazaki.lg.jp/chiikisei/kurashi/ijuu/workcation.html' },
+    ],
   },
   kumamoto: {
     id: 'kumamoto', name: '熊本市', pref: '熊本県',
@@ -139,6 +172,11 @@ export const cityDetails: Record<string, CityDetail> = {
       '阿蘇地域は冬に雪が多く、スタッドレスタイヤが必要な期間がある',
       '熊本地震の復興支援で移住者への優遇制度が充実している',
       '水や空気がきれいで農産物も豊富。自然と都市機能のバランスが絶妙',
+    ],
+    subsidies: [
+      { title: '熊本県移住支援金', amount: '最大100万円', desc: '東京圏からの就業・テレワーク移住者が対象。単身60万円、世帯100万円。子ども加算あり。', url: 'https://www.pref.kumamoto.jp/soshiki/19/ijushienkin.html' },
+      { title: '熊本市空き家リノベーション補助', amount: '最大100万円', desc: '市内の空き家を取得してリノベーションする移住者に工事費の一部を補助。移住促進が目的。', url: 'https://www.city.kumamoto.jp/hpkiji/pub/detail.aspx?c_id=5&id=2937' },
+      { title: '熊本市子育て世帯移住補助', amount: '最大30万円', desc: '子育て世帯が熊本市に移住する際の引越し費用・住宅取得費の一部を補助。', url: 'https://www.city.kumamoto.jp/ijuu/' },
     ],
   },
   kanazawa: {
@@ -162,6 +200,11 @@ export const cityDetails: Record<string, CityDetail> = {
       '伝統工芸（加賀友禅・輪島塗など）が盛んで文化的な習いごとが豊富',
       '北陸新幹線開通後に人気・地価が上昇中。早めの移住検討をおすすめ',
     ],
+    subsidies: [
+      { title: '石川県移住支援金', amount: '最大100万円', desc: '東京圏からの就業・テレワーク移住者が対象。単身60万円、世帯100万円。子ども加算あり。', url: 'https://www.pref.ishikawa.lg.jp/sanroku/ijuu/shienkin.html' },
+      { title: '金沢市移住・定住促進補助', amount: '最大30万円', desc: '市外から金沢市に転入し定住を希望する方への補助。住宅取得・賃借費用の一部を支援。', url: 'https://www4.city.kanazawa.lg.jp/11020/ijuu.html' },
+      { title: '石川県能登移住支援（特別枠）', amount: '最大300万円', desc: '能登半島地震の復興支援として、能登地区への移住者に対し手厚い特別補助金を実施中。', url: 'https://www.pref.ishikawa.lg.jp/sanroku/ijuu/' },
+    ],
   },
   maebashi: {
     id: 'maebashi', name: '前橋市', pref: '群馬県',
@@ -183,6 +226,11 @@ export const cityDetails: Record<string, CityDetail> = {
       '車社会なので居住地と職場・学校のアクセスを事前に確認しておこう',
       '群馬は野菜・農産物が安く、家庭菜園を楽しむ移住者も多い',
       '群馬の移住補助金制度は充実。移住支援をフル活用するなら早めの窓口相談を',
+    ],
+    subsidies: [
+      { title: '群馬県移住支援金', amount: '最大100万円', desc: '東京圏からの就業・テレワーク移住者が対象。単身60万円、世帯100万円。子ども加算あり。', url: 'https://www.pref.gunma.jp/page/7758.html' },
+      { title: '前橋市移住定住促進補助金', amount: '最大50万円', desc: '市外から前橋市に移住し住宅を取得・賃借する方への補助。子育て世帯は加算あり。', url: 'https://www.city.maebashi.gunma.jp/kurashi/ijuu/' },
+      { title: '群馬県空き家活用補助', amount: '最大100万円', desc: '群馬県内の空き家を購入・改修して移住する場合に工事費の一部を補助。農村移住も対象。', url: 'https://www.pref.gunma.jp/page/akiya.html' },
     ],
   },
 }
