@@ -598,6 +598,26 @@
   line-height: 1.6;
 }
 
+/* ---- 詳細ページリンクボタン ---- */
+.detailBtn {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  background: var(--green-dark);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.detailBtn:hover {
+  background: var(--green);
+  transform: translateY(-1px);
+}
+
 /* ---- フッター ---- */
 .footer {
   padding: 20px 24px 32px;

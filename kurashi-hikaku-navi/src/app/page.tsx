@@ -6,11 +6,59 @@ import { simCities, rankCities, whyData } from '@/data/cities'
 import styles from './page.module.css'
 
 const FROM_OPTIONS = [
-  { value: 'tokyo',    label: '東京都' },
-  { value: 'kanagawa', label: '神奈川県' },
-  { value: 'osaka',    label: '大阪府' },
-  { value: 'aichi',    label: '愛知県' },
-  { value: 'saitama',  label: '埼玉県' },
+  // 北海道・東北
+  { value: 'hokkaido',  label: '北海道（札幌市）' },
+  { value: 'aomori',    label: '青森県（青森市）' },
+  { value: 'iwate',     label: '岩手県（盛岡市）' },
+  { value: 'sendai',    label: '宮城県（仙台市）' },
+  { value: 'akita',     label: '秋田県（秋田市）' },
+  { value: 'yamagata',  label: '山形県（山形市）' },
+  { value: 'fukushima', label: '福島県（福島市）' },
+  // 関東
+  { value: 'ibaraki',   label: '茨城県（水戸市）' },
+  { value: 'tochigi',   label: '栃木県（宇都宮市）' },
+  { value: 'maebashi',  label: '群馬県（前橋市）' },
+  { value: 'saitama',   label: '埼玉県（さいたま市）' },
+  { value: 'chiba',     label: '千葉県（千葉市）' },
+  { value: 'tokyo',     label: '東京都' },
+  { value: 'kanagawa',  label: '神奈川県（横浜市）' },
+  // 中部
+  { value: 'niigata',   label: '新潟県（新潟市）' },
+  { value: 'toyama',    label: '富山県（富山市）' },
+  { value: 'kanazawa',  label: '石川県（金沢市）' },
+  { value: 'fukui',     label: '福井県（福井市）' },
+  { value: 'yamanashi', label: '山梨県（甲府市）' },
+  { value: 'nagano',    label: '長野県（長野市）' },
+  { value: 'gifu',      label: '岐阜県（岐阜市）' },
+  { value: 'shizuoka',  label: '静岡県（静岡市）' },
+  { value: 'aichi',     label: '愛知県（名古屋市）' },
+  { value: 'mie',       label: '三重県（津市）' },
+  // 近畿
+  { value: 'shiga',     label: '滋賀県（大津市）' },
+  { value: 'kyoto',     label: '京都府（京都市）' },
+  { value: 'osaka',     label: '大阪府（大阪市）' },
+  { value: 'hyogo',     label: '兵庫県（神戸市）' },
+  { value: 'nara',      label: '奈良県（奈良市）' },
+  { value: 'wakayama',  label: '和歌山県（和歌山市）' },
+  // 中国・四国
+  { value: 'tottori',   label: '鳥取県（鳥取市）' },
+  { value: 'shimane',   label: '島根県（松江市）' },
+  { value: 'okayama',   label: '岡山県（岡山市）' },
+  { value: 'hiroshima', label: '広島県（広島市）' },
+  { value: 'yamaguchi', label: '山口県（山口市）' },
+  { value: 'tokushima', label: '徳島県（徳島市）' },
+  { value: 'kagawa',    label: '香川県（高松市）' },
+  { value: 'ehime',     label: '愛媛県（松山市）' },
+  { value: 'kochi',     label: '高知県（高知市）' },
+  // 九州・沖縄
+  { value: 'fukuoka',   label: '福岡県（福岡市）' },
+  { value: 'saga',      label: '佐賀県（佐賀市）' },
+  { value: 'nagasaki',  label: '長崎県（長崎市）' },
+  { value: 'kumamoto',  label: '熊本県（熊本市）' },
+  { value: 'oita',      label: '大分県（大分市）' },
+  { value: 'miyazaki',  label: '宮崎県（宮崎市）' },
+  { value: 'kagoshima', label: '鹿児島県（鹿児島市）' },
+  { value: 'okinawa',   label: '沖縄県（那覇市）' },
 ]
 
 const TO_OPTIONS = [
@@ -188,6 +236,9 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
+                <Link href={'/cities/' + to} className={styles.detailBtn}>
+                  {result.toName}の詳細ページを見る →
+                </Link>
               </div>
             )}
           </div>
