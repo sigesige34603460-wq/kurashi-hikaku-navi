@@ -122,20 +122,52 @@ export default function CityPage({ params }: Props) {
 
         {/* ご当地グルメ */}
         <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>🍜 ご当地グルメ</h2>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>🍜 ご当地グルメ</h2>
+          <p style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 16 }}>食べログで近くのお店を探せます</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {city.gourmet.map((g, i) => (
               <div key={i} style={{
-                display: 'flex', gap: 10, padding: '12px',
+                display: 'flex', flexDirection: 'column', gap: 8, padding: '12px',
                 border: '1.5px solid var(--border)',
                 borderRadius: 'var(--radius-md)',
                 background: 'var(--earth-pale)',
-                transition: 'border-color 0.15s',
               }}>
-                <span style={{ fontSize: 22, flexShrink: 0 }}>🍽️</span>
-                <div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 3 }}>{g.name}</div>
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.65 }}>{g.desc}</div>
+                <div style={{ display: 'flex', gap: 10 }}>
+                  <span style={{ fontSize: 22, flexShrink: 0 }}>🍽️</span>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 3 }}>{g.name}</div>
+                    <div style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.65 }}>{g.desc}</div>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: 6 }}>
+                  <a
+                    href={`https://tabelog.com/rstLst/?vs=1&sa=${encodeURIComponent(city.name)}&sk=${encodeURIComponent(g.name)}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    style={{
+                      flex: 1, textAlign: 'center', fontSize: 11, fontWeight: 600,
+                      padding: '5px 4px', borderRadius: 6,
+                      background: '#e8f5e9', color: '#2D6A4F',
+                      border: '1px solid rgba(45,106,79,0.2)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    食べログで探す
+                  </a>
+                  <a
+                    href={`https://www.hotpepper.jp/CSP/psh020/?keyword=${encodeURIComponent(g.name)}&areaName=${encodeURIComponent(city.name)}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    style={{
+                      flex: 1, textAlign: 'center', fontSize: 11, fontWeight: 600,
+                      padding: '5px 4px', borderRadius: 6,
+                      background: '#fff3e0', color: '#7C5C3A',
+                      border: '1px solid rgba(124,92,58,0.2)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    ホットペッパー
+                  </a>
                 </div>
               </div>
             ))}
@@ -144,19 +176,52 @@ export default function CityPage({ params }: Props) {
 
         {/* おすすめスポット */}
         <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>📍 おすすめスポット</h2>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>📍 おすすめスポット</h2>
+          <p style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 16 }}>地図や観光情報をすぐに確認できます</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {city.spots.map((s, i) => (
               <div key={i} style={{
-                display: 'flex', gap: 10, padding: '12px',
+                display: 'flex', flexDirection: 'column', gap: 8, padding: '12px',
                 border: '1.5px solid var(--border)',
                 borderRadius: 'var(--radius-md)',
                 background: 'var(--green-pale)',
               }}>
-                <span style={{ fontSize: 22, flexShrink: 0 }}>🗺️</span>
-                <div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 3 }}>{s.name}</div>
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.65 }}>{s.desc}</div>
+                <div style={{ display: 'flex', gap: 10 }}>
+                  <span style={{ fontSize: 22, flexShrink: 0 }}>🗺️</span>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 3 }}>{s.name}</div>
+                    <div style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.65 }}>{s.desc}</div>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: 6 }}>
+                  <a
+                    href={`https://www.google.com/maps/search/${encodeURIComponent(s.name + ' ' + city.name)}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    style={{
+                      flex: 1, textAlign: 'center', fontSize: 11, fontWeight: 600,
+                      padding: '5px 4px', borderRadius: 6,
+                      background: '#e8f5e9', color: '#2D6A4F',
+                      border: '1px solid rgba(45,106,79,0.2)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Google マップ
+                  </a>
+                  <a
+                    href={`https://www.jalan.net/kankou/spt_guide/?keyword=${encodeURIComponent(s.name)}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    style={{
+                      flex: 1, textAlign: 'center', fontSize: 11, fontWeight: 600,
+                      padding: '5px 4px', borderRadius: 6,
+                      background: '#e3f2fd', color: '#0077B6',
+                      border: '1px solid rgba(0,119,182,0.2)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    じゃらん観光
+                  </a>
                 </div>
               </div>
             ))}
