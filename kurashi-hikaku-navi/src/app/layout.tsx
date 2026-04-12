@@ -24,6 +24,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6023646963661694"
+          crossOrigin="anonymous"
+        />
         {/* Google Analytics — headに配置（Search Console認証に必要） */}
         <script
           async
