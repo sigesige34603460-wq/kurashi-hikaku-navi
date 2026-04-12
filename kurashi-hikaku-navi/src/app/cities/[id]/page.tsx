@@ -20,6 +20,19 @@ export default function CityPage({ params }: Props) {
     cost: '💰', conv: '🚃', nat: '🌿', med: '🏥'
   }
 
+  // 公式サイトリンク
+  const officialSiteMap: Record<string, { city: string; pref: string }> = {
+    fukuoka:   { city: 'https://www.city.fukuoka.lg.jp/',          pref: 'https://www.pref.fukuoka.lg.jp/' },
+    sendai:    { city: 'https://www.city.sendai.jp/',               pref: 'https://www.pref.miyagi.jp/' },
+    hiroshima: { city: 'https://www.city.hiroshima.lg.jp/',         pref: 'https://www.pref.hiroshima.lg.jp/' },
+    nagano:    { city: 'https://www.city.nagano.nagano.jp/',        pref: 'https://www.pref.nagano.lg.jp/' },
+    miyazaki:  { city: 'https://www.city.miyazaki.miyazaki.jp/',    pref: 'https://www.pref.miyazaki.lg.jp/' },
+    kumamoto:  { city: 'https://www.city.kumamoto.jp/',             pref: 'https://www.pref.kumamoto.jp/' },
+    kanazawa:  { city: 'https://www4.city.kanazawa.lg.jp/',         pref: 'https://www.pref.ishikawa.lg.jp/' },
+    maebashi:  { city: 'https://www.city.maebashi.gunma.jp/',       pref: 'https://www.pref.gunma.jp/' },
+  }
+  const officialSite = officialSiteMap[params.id]
+
   // 食べログ・ホットペッパーの都道府県コード対応表
   const tabelogPrefMap: Record<string, string> = {
     fukuoka:   'fukuoka',
@@ -128,6 +141,45 @@ export default function CityPage({ params }: Props) {
             {city.catchcopy}
           </p>
         </div>
+
+        {/* 公式サイトリンク */}
+        {officialSite && (
+          <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '18px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
+            <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 12, fontWeight: 600 }}>🏛️ 公式サイトで詳しい情報を確認</p>
+            <div style={{ display: 'flex', gap: 10 }}>
+              <a
+                href={officialSite.city}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  flex: 1, textAlign: 'center', padding: '10px 8px',
+                  background: 'var(--green-pale)',
+                  border: '1.5px solid var(--border)',
+                  borderRadius: 'var(--radius-md)',
+                  fontSize: 13, fontWeight: 700, color: 'var(--green-dark)',
+                  textDecoration: 'none',
+                }}
+              >
+                🏙️ {city.name}公式サイト
+              </a>
+              <a
+                href={officialSite.pref}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  flex: 1, textAlign: 'center', padding: '10px 8px',
+                  background: 'var(--earth-pale)',
+                  border: '1.5px solid rgba(124,92,58,0.2)',
+                  borderRadius: 'var(--radius-md)',
+                  fontSize: 13, fontWeight: 700, color: 'var(--earth)',
+                  textDecoration: 'none',
+                }}
+              >
+                🗾 {city.pref}公式サイト
+              </a>
+            </div>
+          </div>
+        )}
 
         {/* 住みやすさスコア */}
         {rank && (
