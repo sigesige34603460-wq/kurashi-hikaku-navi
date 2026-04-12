@@ -20,6 +20,30 @@ export default function CityPage({ params }: Props) {
     cost: '💰', conv: '🚃', nat: '🌿', med: '🏥'
   }
 
+  // 食べログ・ホットペッパーの都道府県コード対応表
+  const tabelogPrefMap: Record<string, string> = {
+    fukuoka:   'fukuoka',
+    sendai:    'miyagi',
+    hiroshima: 'hiroshima',
+    nagano:    'nagano',
+    miyazaki:  'miyazaki',
+    kumamoto:  'kumamoto',
+    kanazawa:  'ishikawa',
+    maebashi:  'gunma',
+  }
+  const hotpepperAreaMap: Record<string, string> = {
+    fukuoka:   'fukuoka',
+    sendai:    'miyagi',
+    hiroshima: 'hiroshima',
+    nagano:    'nagano',
+    miyazaki:  'miyazaki',
+    kumamoto:  'kumamoto',
+    kanazawa:  'ishikawa',
+    maebashi:  'gunma',
+  }
+  const tabelogPref = tabelogPrefMap[params.id] ?? ''
+  const hotpepperArea = hotpepperAreaMap[params.id] ?? ''
+
   const scoreItems = [
     { label: '生活コスト', value: rank?.cost ?? 0, color: '#2D6A4F' },
     { label: '利便性',     value: rank?.conv ?? 0, color: '#52B788' },
@@ -141,7 +165,7 @@ export default function CityPage({ params }: Props) {
                 </div>
                 <div style={{ display: 'flex', gap: 6 }}>
                   <a
-                    href={`https://tabelog.com/rstLst/?vs=1&sa=${encodeURIComponent(city.name)}&sk=${encodeURIComponent(g.name)}`}
+                    href={`https://tabelog.com/${tabelogPref}/rstLst/?vs=1&sk=${encodeURIComponent(g.name)}`}
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     style={{
@@ -155,7 +179,7 @@ export default function CityPage({ params }: Props) {
                     食べログで探す
                   </a>
                   <a
-                    href={`https://www.hotpepper.jp/CSP/psh020/?keyword=${encodeURIComponent(g.name)}&areaName=${encodeURIComponent(city.name)}`}
+                    href={`https://www.hotpepper.jp/SA${hotpepperArea}/genre/G001/?keyword=${encodeURIComponent(g.name)}`}
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     style={{
