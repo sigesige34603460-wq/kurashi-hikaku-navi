@@ -210,25 +210,10 @@ export default function CityPage({ params }: Props) {
   const hotpepperArea = hotpepperAreaMap[params.id]  ?? ''
   const jalanPref     = jalanPrefMap[params.id]      ?? ''
 
-  // JOIN（移住・交流推進機構）都道府県コード — 総務省認定の公式移住ポータル
-  const joinCodeMap: Record<string, string> = {
-    hokkaido:  '01', aomori:    '02', iwate:     '03', sendai:    '04',
-    akita:     '05', yamagata:  '06', fukushima: '07', ibaraki:   '08',
-    tochigi:   '09', maebashi:  '10', chiba:     '12', niigata:   '15',
-    toyama:    '16', kanazawa:  '17', fukui:     '18', yamanashi: '19',
-    nagano:    '20', gifu:      '21', shizuoka:  '22', aichi:     '23',
-    mie:       '24', shiga:     '25', kyoto:     '26', hyogo:     '28',
-    nara:      '29', wakayama:  '30', tottori:   '31', shimane:   '32',
-    okayama:   '33', hiroshima: '34', yamaguchi: '35', tokushima: '36',
-    kagawa:    '37', ehime:     '38', kochi:     '39', fukuoka:   '40',
-    saga:      '41', nagasaki:  '42', kumamoto:  '43', oita:      '44',
-    miyazaki:  '45', kagoshima: '46', okinawa:   '47',
-  }
-  const joinCode = joinCodeMap[params.id] ?? ''
-  // JOIN 補助金検索URL（都道府県別の移住支援情報ページ）
-  const joinSubsidyUrl = joinCode
-    ? `https://www.iju-join.jp/cgi-bin/search.cgi/search?p_pref_code=${joinCode}`
-    : 'https://www.iju-join.jp/shienkin/'
+  // じゃらん観光ランキングURL（都道府県別）
+  const jalanRankingUrl = jalanPref
+    ? `https://www.jalan.net/kankou/spt_${jalanPref}/ranking/`
+    : ''
 
   // 料理名から食べログのジャンルコードを自動判定
   function getTabelogGenre(name: string): string | null {
@@ -450,7 +435,24 @@ export default function CityPage({ params }: Props) {
 
         {/* おすすめスポット */}
         <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>📍 おすすめスポット</h2>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4, flexWrap: 'wrap', gap: 8 }}>
+            <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)' }}>📍 おすすめスポット</h2>
+            {jalanRankingUrl && (
+              <a
+                href={jalanRankingUrl}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                style={{
+                  fontSize: 11, fontWeight: 700, padding: '5px 12px',
+                  background: 'linear-gradient(135deg,#0077B6,#0096C7)',
+                  color: '#fff', borderRadius: 20, textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                🏆 {city.pref}の観光ランキングを見る
+              </a>
+            )}
+          </div>
           <p style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 16 }}>地図や観光情報をすぐに確認できます</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {city.spots.map((s, i) => (
@@ -526,7 +528,7 @@ export default function CityPage({ params }: Props) {
                   <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 10 }}>{s.desc}</p>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     <a
-                      href={joinSubsidyUrl}
+                      href={`https://www.google.com/search?q=${encodeURIComponent(s.title + ' ' + city.pref + ' 申請方法')}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
@@ -536,7 +538,7 @@ export default function CityPage({ params }: Props) {
                         border: '1px solid rgba(45,106,79,0.2)', textDecoration: 'none',
                       }}
                     >
-                      JOIN移住ポータルで詳しく見る →
+                      🔍 詳細・申請方法を検索
                     </a>
                     <a
                       href={officialSite?.pref ?? '#'}
