@@ -31,18 +31,31 @@ export default function CityPage({ params }: Props) {
     kanazawa:  'ishikawa',
     maebashi:  'gunma',
   }
+  // ホットペッパー エリアコード（SAZ + 3桁）
   const hotpepperAreaMap: Record<string, string> = {
-    fukuoka:   'fukuoka',
-    sendai:    'miyagi',
-    hiroshima: 'hiroshima',
-    nagano:    'nagano',
-    miyazaki:  'miyazaki',
-    kumamoto:  'kumamoto',
-    kanazawa:  'ishikawa',
-    maebashi:  'gunma',
+    fukuoka:   'SAZ011',
+    sendai:    'SAZ031',
+    hiroshima: 'SAZ021',
+    nagano:    'SAZ041',
+    miyazaki:  'SAZ013',
+    kumamoto:  'SAZ012',
+    kanazawa:  'SAZ042',
+    maebashi:  'SAZ034',
   }
-  const tabelogPref = tabelogPrefMap[params.id] ?? ''
-  const hotpepperArea = hotpepperAreaMap[params.id] ?? ''
+  // じゃらん 都道府県コード（2桁ゼロ埋め）
+  const jalanPrefMap: Record<string, string> = {
+    fukuoka:   '40',
+    sendai:    '04',
+    hiroshima: '34',
+    nagano:    '20',
+    miyazaki:  '45',
+    kumamoto:  '43',
+    kanazawa:  '17',
+    maebashi:  '10',
+  }
+  const tabelogPref   = tabelogPrefMap[params.id]   ?? ''
+  const hotpepperArea = hotpepperAreaMap[params.id]  ?? ''
+  const jalanPref     = jalanPrefMap[params.id]      ?? ''
 
   // 料理名から食べログのジャンルコードを自動判定
   function getTabelogGenre(name: string): string | null {
@@ -204,7 +217,7 @@ export default function CityPage({ params }: Props) {
                     食べログで探す
                   </a>
                   <a
-                    href={`https://www.hotpepper.jp/SA${hotpepperArea}/genre/G001/?keyword=${encodeURIComponent(g.name)}`}
+                    href={`https://www.hotpepper.jp/${hotpepperArea}/lst/?keyword=${encodeURIComponent(g.name)}`}
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     style={{
@@ -258,7 +271,7 @@ export default function CityPage({ params }: Props) {
                     Google マップ
                   </a>
                   <a
-                    href={`https://www.jalan.net/kankou/spt_guide/?keyword=${encodeURIComponent(s.name)}`}
+                    href={`https://www.jalan.net/kankou/pref${jalanPref}/?keyword=${encodeURIComponent(s.name)}`}
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     style={{
