@@ -4,14 +4,13 @@
 
 /* ---- ヒーロー ---- */
 .hero {
-  padding: 48px 24px 36px;
+  padding: 48px 24px 56px;
   background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 60%, var(--green-mid) 100%);
   border-bottom: none;
   position: relative;
   overflow: hidden;
 }
 
-/* 背景に葉脈のような装飾 */
 .hero::before {
   content: '';
   position: absolute;
@@ -53,10 +52,17 @@
 /* ---- ステップインジケーター ---- */
 .steps {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 4px;
   margin-top: 20px;
   font-size: 12px;
   flex-wrap: wrap;
+}
+
+.stepWrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .step {
@@ -66,11 +72,7 @@
   color: rgba(255,255,255,0.55);
 }
 
-.step + .step::before {
-  content: '→';
-  color: rgba(255,255,255,0.3);
-  margin-right: 2px;
-}
+.stepOn { color: rgba(255,255,255,0.95); }
 
 .stepNum {
   width: 22px;
@@ -85,16 +87,23 @@
   flex-shrink: 0;
 }
 
-.stepOn { color: rgba(255,255,255,0.95); }
 .stepOn .stepNum {
   background: #ffffff;
   color: var(--green-dark);
   border-color: #ffffff;
 }
 
-/* ---- カード（シミュレーター） ---- */
+.stepLabel { font-size: 12px; }
+
+.stepSep {
+  color: rgba(255,255,255,0.3);
+  font-size: 14px;
+  padding: 0 2px;
+}
+
+/* ---- シミュレーターカード ---- */
 .card {
-  margin: -20px 16px 0;
+  margin: 20px 0 0;
   padding: 24px 20px;
   background: var(--white);
   border-radius: var(--radius-xl);
@@ -110,14 +119,23 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   color: var(--text-muted);
-  margin-bottom: 6px;
+  margin: 14px 0 6px;
   text-transform: uppercase;
 }
+
+.fieldLabel:first-child { margin-top: 0; }
 
 .incomeRow {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.incomeLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .incomeVal {
@@ -133,10 +151,16 @@
   height: 4px;
 }
 
-.selectRow {
+.cityRow {
   display: flex;
-  gap: 10px;
-  margin-top: 14px;
+  align-items: center;
+  gap: 8px;
+}
+
+.arrow {
+  font-size: 16px;
+  color: var(--green-mid);
+  flex-shrink: 0;
 }
 
 .select {
@@ -146,8 +170,9 @@
   border-radius: var(--radius-md);
   background: var(--green-pale);
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
   transition: border-color 0.2s;
+  min-width: 0;
 }
 
 .select:focus {
@@ -168,6 +193,7 @@
   letter-spacing: 0.04em;
   box-shadow: 0 4px 12px rgba(45, 106, 79, 0.35);
   transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -177,7 +203,7 @@
 
 .btn:active { transform: translateY(0); }
 
-/* ---- 結果 ---- */
+/* ---- シミュレーション結果 ---- */
 .result {
   margin-top: 20px;
   display: flex;
@@ -193,40 +219,52 @@
   text-align: center;
 }
 
-.resultLabel {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 4px;
+.resultMain {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 6px;
 }
 
 .resultNum {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 800;
   color: var(--green-darker);
   line-height: 1.1;
 }
 
-.resultSub {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 4px;
+.resultUnit {
+  font-size: 14px;
+  color: var(--green-dark);
+  font-weight: 600;
 }
 
-.barList { display: flex; flex-direction: column; gap: 10px; }
+.resultDesc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
 
-.barItem {}
-
-.barHead {
+.barRow {
   display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 4px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
 }
 
-.barTrack {
+.barLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  width: 36px;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.barBg {
+  flex: 1;
   height: 8px;
-  background: var(--green-light);
+  background: rgba(45, 106, 79, 0.12);
   border-radius: 100px;
   overflow: hidden;
 }
@@ -238,48 +276,221 @@
   transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.grantBadge {
+.barVal {
+  font-size: 11px;
+  color: var(--text-muted);
+  width: 64px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.grant {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: var(--earth-pale);
+  border: 1px solid rgba(124, 92, 58, 0.2);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  color: var(--earth);
+  text-align: left;
+}
+
+.grantDot {
+  width: 8px;
+  height: 8px;
+  background: var(--earth);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* 住みやすい理由 */
+.why {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+
+.whyTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.whyPoints {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.whyPoint {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.whyIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: var(--earth-pale);
-  border: 1.5px solid rgba(124, 92, 58, 0.2);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-  font-size: 13px;
-  color: var(--earth);
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.whyText {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.6;
 }
 
 /* ---- セクション共通 ---- */
 .section {
-  padding: 32px 20px;
+  padding: 32px 16px;
   border-bottom: 1px solid var(--border);
 }
 
-.sectionTitle {
-  font-size: 18px;
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.sectionHead h2 {
+  font-size: 17px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 4px;
 }
 
-.sectionSub {
-  font-size: 12px;
+.sectionHead span {
+  font-size: 11px;
   color: var(--text-muted);
-  margin-bottom: 18px;
 }
 
-/* 森の区切り線 */
-.divider {
-  text-align: center;
-  font-size: 18px;
+/* ---- 地方フィルタータブ ---- */
+.regionTabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.regionTab {
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  background: var(--white);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.regionTab:hover {
+  border-color: var(--green-mid);
+  color: var(--green-dark);
+}
+
+.regionTabActive {
+  background: var(--green-dark);
+  color: #ffffff;
+  border-color: var(--green-dark);
+}
+
+/* ---- 47都道府県グリッド ---- */
+.prefGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 480px) {
+  .prefGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.prefCard {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+
+.prefCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--green-mid);
+}
+
+.prefCardPref {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.prefCardCity {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.prefCardSaving {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+.prefCardSavingNum {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--green);
+}
+
+.prefCardSavingLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.prefCardSavingMinus {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.prefCardScores {
+  display: flex;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.prefCardArrow {
+  font-size: 11px;
   color: var(--green-mid);
-  opacity: 0.5;
-  padding: 4px 0;
-  letter-spacing: 8px;
+  font-weight: 600;
+  margin-top: auto;
 }
 
-/* ---- 都市カード ---- */
+/* ---- 旧都市カード（後方互換） ---- */
 .cityCards {
   display: flex;
   flex-direction: column;
@@ -287,15 +498,11 @@
 }
 
 .cityCard {
-  display: flex;
-  align-items: center;
-  gap: 14px;
   padding: 16px;
   background: var(--white);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  text-decoration: none;
   transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
 }
 
@@ -305,12 +512,12 @@
   border-color: var(--green-mid);
 }
 
-.cityCardEmoji {
-  font-size: 32px;
-  flex-shrink: 0;
+.cityCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
 }
-
-.cityCardBody { flex: 1; }
 
 .cityCardName {
   font-size: 15px;
@@ -327,23 +534,44 @@
 .cityCardSub {
   font-size: 11px;
   color: var(--text-muted);
+  margin-bottom: 10px;
 }
 
-.cityCardArrow {
-  font-size: 18px;
+.cityCardLink {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--green-mid);
-  flex-shrink: 0;
+  text-decoration: none;
 }
 
-/* ---- フィーチャー（特徴） ---- */
-.feats {
+/* バッジ */
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+
+.badgeGreen {
+  background: var(--green-light);
+  color: var(--green-dark);
+}
+
+.badgeAmber {
+  background: var(--earth-light);
+  color: var(--earth);
+}
+
+/* ---- フィーチャー ---- */
+.features {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
 .feat {
-  padding: 18px 14px;
+  padding: 16px 12px;
   text-align: center;
   background: var(--white);
   border: 1.5px solid var(--border);
@@ -352,7 +580,8 @@
 }
 
 .featIcon {
-  font-size: 28px;
+  display: flex;
+  justify-content: center;
   margin-bottom: 8px;
 }
 
@@ -369,46 +598,6 @@
   line-height: 1.6;
 }
 
-/* ---- サービスリンク ---- */
-.serviceLinks {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.serviceLink {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px;
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-lg);
-  text-decoration: none;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-
-.serviceLink:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.serviceLinkIcon { font-size: 26px; flex-shrink: 0; }
-
-.serviceLinkBody { flex: 1; }
-
-.serviceLinkTitle {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.serviceLinkSub {
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
 /* ---- フッター ---- */
 .footer {
   padding: 20px 24px 32px;
@@ -416,10 +605,4 @@
   color: var(--text-light);
   text-align: center;
   line-height: 1.8;
-}
-
-.footerNote {
-  margin-top: 8px;
-  font-size: 10px;
-  opacity: 0.7;
 }

@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Header from '@/components/Header'
 import Link from 'next/link'
-import { simCities, whyData } from '@/data/cities'
+import { simCities, rankCities, whyData } from '@/data/cities'
 import styles from './page.module.css'
 
 const FROM_OPTIONS = [
@@ -12,16 +12,60 @@ const FROM_OPTIONS = [
   { value: 'aichi',    label: '愛知県' },
   { value: 'saitama',  label: '埼玉県' },
 ]
+
 const TO_OPTIONS = [
-  { value: 'fukuoka',   label: '福岡市（福岡県）' },
-  { value: 'sendai',    label: '仙台市（宮城県）' },
-  { value: 'hiroshima', label: '広島市（広島県）' },
-  { value: 'nagano',    label: '長野市（長野県）' },
-  { value: 'miyazaki',  label: '宮崎市（宮崎県）' },
-  { value: 'kumamoto',  label: '熊本市（熊本県）' },
-  { value: 'kanazawa',  label: '金沢市（石川県）' },
-  { value: 'maebashi',  label: '前橋市（群馬県）' },
+  // 北海道・東北
+  { value: 'hokkaido',  label: '北海道（札幌市）',   region: '北海道・東北' },
+  { value: 'aomori',    label: '青森県（青森市）',   region: '北海道・東北' },
+  { value: 'iwate',     label: '岩手県（盛岡市）',   region: '北海道・東北' },
+  { value: 'sendai',    label: '宮城県（仙台市）',   region: '北海道・東北' },
+  { value: 'akita',     label: '秋田県（秋田市）',   region: '北海道・東北' },
+  { value: 'yamagata',  label: '山形県（山形市）',   region: '北海道・東北' },
+  { value: 'fukushima', label: '福島県（福島市）',   region: '北海道・東北' },
+  // 関東
+  { value: 'ibaraki',   label: '茨城県（水戸市）',   region: '関東' },
+  { value: 'tochigi',   label: '栃木県（宇都宮市）', region: '関東' },
+  { value: 'maebashi',  label: '群馬県（前橋市）',   region: '関東' },
+  { value: 'chiba',     label: '千葉県（千葉市）',   region: '関東' },
+  // 中部
+  { value: 'niigata',   label: '新潟県（新潟市）',   region: '中部' },
+  { value: 'toyama',    label: '富山県（富山市）',   region: '中部' },
+  { value: 'kanazawa',  label: '石川県（金沢市）',   region: '中部' },
+  { value: 'fukui',     label: '福井県（福井市）',   region: '中部' },
+  { value: 'yamanashi', label: '山梨県（甲府市）',   region: '中部' },
+  { value: 'nagano',    label: '長野県（長野市）',   region: '中部' },
+  { value: 'gifu',      label: '岐阜県（岐阜市）',   region: '中部' },
+  { value: 'shizuoka',  label: '静岡県（静岡市）',   region: '中部' },
+  { value: 'mie',       label: '三重県（津市）',     region: '中部' },
+  // 近畿
+  { value: 'shiga',     label: '滋賀県（大津市）',   region: '近畿' },
+  { value: 'kyoto',     label: '京都府（京都市）',   region: '近畿' },
+  { value: 'hyogo',     label: '兵庫県（神戸市）',   region: '近畿' },
+  { value: 'nara',      label: '奈良県（奈良市）',   region: '近畿' },
+  { value: 'wakayama',  label: '和歌山県（和歌山市）', region: '近畿' },
+  // 中国・四国
+  { value: 'tottori',   label: '鳥取県（鳥取市）',   region: '中国・四国' },
+  { value: 'shimane',   label: '島根県（松江市）',   region: '中国・四国' },
+  { value: 'okayama',   label: '岡山県（岡山市）',   region: '中国・四国' },
+  { value: 'hiroshima', label: '広島県（広島市）',   region: '中国・四国' },
+  { value: 'yamaguchi', label: '山口県（山口市）',   region: '中国・四国' },
+  { value: 'tokushima', label: '徳島県（徳島市）',   region: '中国・四国' },
+  { value: 'kagawa',    label: '香川県（高松市）',   region: '中国・四国' },
+  { value: 'ehime',     label: '愛媛県（松山市）',   region: '中国・四国' },
+  { value: 'kochi',     label: '高知県（高知市）',   region: '中国・四国' },
+  // 九州・沖縄
+  { value: 'fukuoka',   label: '福岡県（福岡市）',   region: '九州・沖縄' },
+  { value: 'saga',      label: '佐賀県（佐賀市）',   region: '九州・沖縄' },
+  { value: 'nagasaki',  label: '長崎県（長崎市）',   region: '九州・沖縄' },
+  { value: 'kumamoto',  label: '熊本県（熊本市）',   region: '九州・沖縄' },
+  { value: 'oita',      label: '大分県（大分市）',   region: '九州・沖縄' },
+  { value: 'miyazaki',  label: '宮崎県（宮崎市）',   region: '九州・沖縄' },
+  { value: 'kagoshima', label: '鹿児島県（鹿児島市）', region: '九州・沖縄' },
+  { value: 'okinawa',   label: '沖縄県（那覇市）',   region: '九州・沖縄' },
 ]
+
+const REGIONS = ['すべて', '北海道・東北', '関東', '中部', '近畿', '中国・四国', '九州・沖縄']
+
 const iconBg = { cost: '#E1F5EE', conv: '#E6F1FB', nat: '#EAF3DE', med: '#FBEAF0' }
 const iconColor = { cost: '#085041', conv: '#0C447C', nat: '#27500A', med: '#72243E' }
 
@@ -30,6 +74,7 @@ export default function Home() {
   const [from, setFrom] = useState('tokyo')
   const [to, setTo] = useState('fukuoka')
   const [result, setResult] = useState(null)
+  const [activeRegion, setActiveRegion] = useState('すべて')
 
   function simulate() {
     const f = simCities[from]
@@ -47,6 +92,13 @@ export default function Home() {
 
   const reasons = whyData[to] ?? []
   const maxSave = 65000
+
+  const tokyoBase = simCities['tokyo']
+  const filteredCities = rankCities.filter(c => {
+    if (activeRegion === 'すべて') return true
+    const opt = TO_OPTIONS.find(o => o.value === c.id)
+    return opt?.region === activeRegion
+  })
 
   return (
     <>
@@ -140,29 +192,57 @@ export default function Home() {
             )}
           </div>
         </section>
+
+        {/* 47都道府県一覧 */}
         <section className={styles.section}>
           <div className={styles.sectionHead}>
-            <h2>東京から移住すると？おすすめの街</h2>
-            <span>月収30万円の場合</span>
+            <h2>47都道府県から探す</h2>
+            <span>東京からの月間節約額目安</span>
           </div>
-          <div className={styles.cityCards}>
-            {[
-              { id: 'fukuoka',  name: '福岡市', pref: '福岡県', saving: '月4.2万円', sub: '年50万円以上の節約', badge: '都市機能◎', badgeType: 'green' },
-              { id: 'miyazaki', name: '宮崎市', pref: '宮崎県', saving: '月5.8万円', sub: '年70万円以上の節約', badge: '自然豊か', badgeType: 'amber' },
-              { id: 'maebashi', name: '前橋市', pref: '群馬県', saving: '月5.6万円', sub: '新幹線で東京へ1時間', badge: '東京通勤可', badgeType: 'green' },
-            ].map((c, i) => (
-              <div key={i} className={styles.cityCard}>
-                <div className={styles.cityCardTop}>
-                  <span className={styles.cityCardName}>{c.name}</span>
-                  <span className={styles.badge + (c.badgeType === 'amber' ? ' ' + styles.badgeAmber : ' ' + styles.badgeGreen)}>{c.badge}</span>
-                </div>
-                <div className={styles.cityCardSaving}>{c.saving}</div>
-                <div className={styles.cityCardSub}>{c.sub}</div>
-                <Link href={'/cities/' + c.id} className={styles.cityCardLink}>詳しく見る →</Link>
-              </div>
+
+          {/* 地方フィルタータブ */}
+          <div className={styles.regionTabs}>
+            {REGIONS.map(r => (
+              <button
+                key={r}
+                className={styles.regionTab + (activeRegion === r ? ' ' + styles.regionTabActive : '')}
+                onClick={() => setActiveRegion(r)}
+              >
+                {r}
+              </button>
             ))}
           </div>
+
+          <div className={styles.prefGrid}>
+            {filteredCities.map(c => {
+              const city = simCities[c.id]
+              const saving = city
+                ? tokyoBase.rent + tokyoBase.food + tokyoBase.util - city.rent - city.food - city.util
+                : 0
+              const savingMan = Math.round(saving / 10000 * 10) / 10
+              return (
+                <Link key={c.id} href={'/cities/' + c.id} className={styles.prefCard}>
+                  <div className={styles.prefCardPref}>{c.pref}</div>
+                  <div className={styles.prefCardCity}>{c.name}</div>
+                  <div className={styles.prefCardSaving}>
+                    {saving > 0 ? (
+                      <><span className={styles.prefCardSavingNum}>月{savingMan}万円</span><span className={styles.prefCardSavingLabel}>節約</span></>
+                    ) : (
+                      <span className={styles.prefCardSavingMinus}>東京と同水準</span>
+                    )}
+                  </div>
+                  <div className={styles.prefCardScores}>
+                    <span title="コスト" style={{color:'var(--green-dark)'}}>¥{c.cost}</span>
+                    <span title="利便" style={{color:'#2563EB'}}>🚃{c.conv}</span>
+                    <span title="自然" style={{color:'#16a34a'}}>🌿{c.nat}</span>
+                  </div>
+                  <div className={styles.prefCardArrow}>詳しく見る →</div>
+                </Link>
+              )
+            })}
+          </div>
         </section>
+
         <section className={styles.section}>
           <div className={styles.sectionHead}><h2>このサイトでできること</h2></div>
           <div className={styles.features}>
