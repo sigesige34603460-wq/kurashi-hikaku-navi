@@ -31,27 +31,27 @@ export default function CityPage({ params }: Props) {
     kanazawa:  'ishikawa',
     maebashi:  'gunma',
   }
-  // ホットペッパー エリアコード（SAZ + 3桁）
+  // ホットペッパー エリアコード（正式コード）
   const hotpepperAreaMap: Record<string, string> = {
-    fukuoka:   'SAZ011',
-    sendai:    'SAZ031',
-    hiroshima: 'SAZ021',
-    nagano:    'SAZ041',
-    miyazaki:  'SAZ013',
-    kumamoto:  'SAZ012',
-    kanazawa:  'SAZ042',
-    maebashi:  'SAZ034',
+    fukuoka:   'SA91',
+    sendai:    'SA53',
+    hiroshima: 'SA74',
+    nagano:    'SA66',
+    miyazaki:  'SA96',
+    kumamoto:  'SA94',
+    kanazawa:  'SA63',
+    maebashi:  'SA17',
   }
-  // じゃらん 都道府県コード（2桁ゼロ埋め）
+  // じゃらん観光 都道府県コード（6桁）
   const jalanPrefMap: Record<string, string> = {
-    fukuoka:   '40',
-    sendai:    '04',
-    hiroshima: '34',
-    nagano:    '20',
-    miyazaki:  '45',
-    kumamoto:  '43',
-    kanazawa:  '17',
-    maebashi:  '10',
+    fukuoka:   '400000',
+    sendai:    '040000',
+    hiroshima: '340000',
+    nagano:    '200000',
+    miyazaki:  '450000',
+    kumamoto:  '430000',
+    kanazawa:  '170000',
+    maebashi:  '100000',
   }
   const tabelogPref   = tabelogPrefMap[params.id]   ?? ''
   const hotpepperArea = hotpepperAreaMap[params.id]  ?? ''
@@ -271,7 +271,7 @@ export default function CityPage({ params }: Props) {
                     Google マップ
                   </a>
                   <a
-                    href={`https://www.jalan.net/kankou/pref${jalanPref}/?keyword=${encodeURIComponent(s.name)}`}
+                    href={`https://www.jalan.net/kankou/${jalanPref}/?keyword=${encodeURIComponent(s.name)}`}
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     style={{
