@@ -44,6 +44,27 @@ export default function CityPage({ params }: Props) {
   const tabelogPref = tabelogPrefMap[params.id] ?? ''
   const hotpepperArea = hotpepperAreaMap[params.id] ?? ''
 
+  // 料理名から食べログのジャンルコードを自動判定
+  function getTabelogGenre(name: string): string | null {
+    if (/ラーメン|らーめん|中華そば/.test(name)) return 'ramen'
+    if (/寿司|すし|鮨|回転寿司/.test(name)) return 'sushi'
+    if (/焼肉|ホルモン|もつ|モツ/.test(name)) return 'yakiniku'
+    if (/居酒屋/.test(name)) return 'izakaya'
+    if (/うどん|饂飩/.test(name)) return 'udon'
+    if (/そば|蕎麦/.test(name)) return 'soba'
+    if (/天ぷら|てんぷら/.test(name)) return 'tempura'
+    if (/カレー/.test(name)) return 'curry'
+    if (/鍋|なべ|水炊き|ちゃんこ/.test(name)) return 'nabe'
+    if (/焼き鳥|焼鳥|串焼き|串/.test(name)) return 'yakitori'
+    if (/中華|ちゃんぽん|餃子/.test(name)) return 'chinese'
+    if (/海鮮|魚|刺身|牡蠣|カキ|海老|かに|カニ/.test(name)) return 'seafood'
+    if (/ステーキ|ハンバーグ/.test(name)) return 'steak'
+    if (/イタリアン|パスタ|ピザ/.test(name)) return 'italian'
+    if (/フレンチ/.test(name)) return 'french'
+    if (/焼き魚|定食/.test(name)) return 'teishoku'
+    return null
+  }
+
   const scoreItems = [
     { label: '生活コスト', value: rank?.cost ?? 0, color: '#2D6A4F' },
     { label: '利便性',     value: rank?.conv ?? 0, color: '#52B788' },
@@ -165,7 +186,11 @@ export default function CityPage({ params }: Props) {
                 </div>
                 <div style={{ display: 'flex', gap: 6 }}>
                   <a
-                    href={`https://tabelog.com/${tabelogPref}/rstLst/?vs=1&sk=${encodeURIComponent(g.name)}`}
+                    href={
+                      getTabelogGenre(g.name)
+                        ? `https://tabelog.com/${tabelogPref}/rstLst/${getTabelogGenre(g.name)}/`
+                        : `https://tabelog.com/${tabelogPref}/rstLst/?sk=${encodeURIComponent(g.name)}`
+                    }
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     style={{
