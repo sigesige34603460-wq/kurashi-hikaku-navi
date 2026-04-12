@@ -41,6 +41,7 @@ export default function CityPage({ params }: Props) {
     nagano:    { city: 'https://www.city.nagano.nagano.jp/',        pref: 'https://www.pref.nagano.lg.jp/' },
     gifu:      { city: 'https://www.city.gifu.lg.jp/',              pref: 'https://www.pref.gifu.lg.jp/' },
     shizuoka:  { city: 'https://www.city.shizuoka.lg.jp/',          pref: 'https://www.pref.shizuoka.jp/' },
+    aichi:     { city: 'https://www.city.nagoya.jp/',               pref: 'https://www.pref.aichi.jp/' },
     mie:       { city: 'https://www.city.tsu.lg.jp/',               pref: 'https://www.pref.mie.lg.jp/' },
     shiga:     { city: 'https://www.city.otsu.lg.jp/',              pref: 'https://www.pref.shiga.lg.jp/' },
     kyoto:     { city: 'https://www.city.kyoto.lg.jp/',             pref: 'https://www.pref.kyoto.jp/' },
@@ -88,6 +89,7 @@ export default function CityPage({ params }: Props) {
     nagano:    'nagano',
     gifu:      'gifu',
     shizuoka:  'shizuoka',
+    aichi:     'aichi',
     mie:       'mie',
     shiga:     'shiga',
     kyoto:     'kyoto',
@@ -133,6 +135,7 @@ export default function CityPage({ params }: Props) {
     nagano:    'SA66',
     gifu:      'SA67',
     shizuoka:  'SA68',
+    aichi:     'SA31',
     mie:       'SA69',
     shiga:     'SA71',
     kyoto:     'SA72',
@@ -178,6 +181,7 @@ export default function CityPage({ params }: Props) {
     nagano:    '200000',
     gifu:      '210000',
     shizuoka:  '220000',
+    aichi:     '230000',
     mie:       '240000',
     shiga:     '250000',
     kyoto:     '260000',
@@ -205,6 +209,26 @@ export default function CityPage({ params }: Props) {
   const tabelogPref   = tabelogPrefMap[params.id]   ?? ''
   const hotpepperArea = hotpepperAreaMap[params.id]  ?? ''
   const jalanPref     = jalanPrefMap[params.id]      ?? ''
+
+  // JOIN（移住・交流推進機構）都道府県コード — 総務省認定の公式移住ポータル
+  const joinCodeMap: Record<string, string> = {
+    hokkaido:  '01', aomori:    '02', iwate:     '03', sendai:    '04',
+    akita:     '05', yamagata:  '06', fukushima: '07', ibaraki:   '08',
+    tochigi:   '09', maebashi:  '10', chiba:     '12', niigata:   '15',
+    toyama:    '16', kanazawa:  '17', fukui:     '18', yamanashi: '19',
+    nagano:    '20', gifu:      '21', shizuoka:  '22', aichi:     '23',
+    mie:       '24', shiga:     '25', kyoto:     '26', hyogo:     '28',
+    nara:      '29', wakayama:  '30', tottori:   '31', shimane:   '32',
+    okayama:   '33', hiroshima: '34', yamaguchi: '35', tokushima: '36',
+    kagawa:    '37', ehime:     '38', kochi:     '39', fukuoka:   '40',
+    saga:      '41', nagasaki:  '42', kumamoto:  '43', oita:      '44',
+    miyazaki:  '45', kagoshima: '46', okinawa:   '47',
+  }
+  const joinCode = joinCodeMap[params.id] ?? ''
+  // JOIN 補助金検索URL（都道府県別の移住支援情報ページ）
+  const joinSubsidyUrl = joinCode
+    ? `https://www.iju-join.jp/cgi-bin/search.cgi/search?p_pref_code=${joinCode}`
+    : 'https://www.iju-join.jp/shienkin/'
 
   // 料理名から食べログのジャンルコードを自動判定
   function getTabelogGenre(name: string): string | null {
@@ -500,19 +524,34 @@ export default function CityPage({ params }: Props) {
                     }}>{s.amount}</span>
                   </div>
                   <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 10 }}>{s.desc}</p>
-                  <a
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-block', fontSize: 11, fontWeight: 600,
-                      color: 'var(--green-dark)', padding: '5px 12px',
-                      background: 'var(--green-light)', borderRadius: 6,
-                      border: '1px solid rgba(45,106,79,0.2)', textDecoration: 'none',
-                    }}
-                  >
-                    公式サイトで詳しく見る →
-                  </a>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    <a
+                      href={joinSubsidyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'inline-block', fontSize: 11, fontWeight: 600,
+                        color: 'var(--green-dark)', padding: '5px 12px',
+                        background: 'var(--green-light)', borderRadius: 6,
+                        border: '1px solid rgba(45,106,79,0.2)', textDecoration: 'none',
+                      }}
+                    >
+                      JOIN移住ポータルで詳しく見る →
+                    </a>
+                    <a
+                      href={officialSite?.pref ?? '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'inline-block', fontSize: 11, fontWeight: 600,
+                        color: 'var(--earth)', padding: '5px 12px',
+                        background: '#fff', borderRadius: 6,
+                        border: '1px solid rgba(124,92,58,0.25)', textDecoration: 'none',
+                      }}
+                    >
+                      {city.pref}公式サイト →
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>

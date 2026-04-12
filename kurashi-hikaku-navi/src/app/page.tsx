@@ -84,6 +84,7 @@ const TO_OPTIONS = [
   { value: 'nagano',    label: '長野県（長野市）',   region: '中部' },
   { value: 'gifu',      label: '岐阜県（岐阜市）',   region: '中部' },
   { value: 'shizuoka',  label: '静岡県（静岡市）',   region: '中部' },
+  { value: 'aichi',     label: '愛知県（名古屋市）', region: '中部' },
   { value: 'mie',       label: '三重県（津市）',     region: '中部' },
   // 近畿
   { value: 'shiga',     label: '滋賀県（大津市）',   region: '近畿' },

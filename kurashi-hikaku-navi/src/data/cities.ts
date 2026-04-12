@@ -109,6 +109,7 @@ export const rankCities: RankCity[] = [
   { id: 'nagano',    name: '長野市',   pref: '長野県',   cost: 84, conv: 58, nat: 90, med: 65 },
   { id: 'gifu',      name: '岐阜市',   pref: '岐阜県',   cost: 83, conv: 65, nat: 85, med: 65 },
   { id: 'shizuoka',  name: '静岡市',   pref: '静岡県',   cost: 75, conv: 72, nat: 80, med: 70 },
+  { id: 'aichi',     name: '名古屋市', pref: '愛知県',   cost: 65, conv: 88, nat: 55, med: 85 },
   { id: 'mie',       name: '津市',     pref: '三重県',   cost: 82, conv: 60, nat: 80, med: 62 },
   // 近畿
   { id: 'shiga',     name: '大津市',   pref: '滋賀県',   cost: 78, conv: 70, nat: 78, med: 68 },
@@ -139,6 +140,12 @@ export const rankCities: RankCity[] = [
 ]
 
 export const whyData: Record<string, WhyPoint[]> = {
+  aichi: [
+    { icon: 'conv', title: '交通アクセスが日本最高水準', desc: '名古屋は新幹線・地下鉄・JR・近鉄が集中。東京・大阪いずれも1時間圏内でビジネスに便利。' },
+    { icon: 'med',  title: '医療・大学病院が充実', desc: '名古屋大学病院をはじめ高度医療機関が多く、安心して暮らせる医療環境です。' },
+    { icon: 'cost', title: '東京より生活コストが低い', desc: '名古屋の家賃は東京比で約40%安。食費も抑えられ、月3〜4万円の節約が見込めます。' },
+    { icon: 'nat',  title: '海・山・里山がバランスよく近い', desc: '知多半島・三河湾の海、木曽山脈の山々。週末のアウトドアや農家体験も充実しています。' },
+  ],
   hokkaido: [
     { icon: 'cost', title: '家賃が東京の半額以下', desc: '札幌の平均家賃は約5.2万円。食費も安く、東京比で月5〜6万円の節約が可能です。' },
     { icon: 'nat',  title: '雄大な自然が日常に', desc: '四季折々の絶景。スキー・登山・釣りなどアウトドアが生活の中にあります。' },
