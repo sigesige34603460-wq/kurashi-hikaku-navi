@@ -377,7 +377,24 @@ export default function CityPage({ params }: Props) {
 
         {/* ご当地グルメ */}
         <div style={{ background: 'var(--white)', borderRadius: 'var(--radius-xl)', padding: '24px 20px', boxShadow: 'var(--shadow-sm)', border: '1.5px solid var(--border)' }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>🍜 ご当地グルメ</h2>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4, flexWrap: 'wrap', gap: 8 }}>
+            <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)' }}>🍜 ご当地グルメ</h2>
+            {tabelogPref && (
+              <a
+                href={`https://tabelog.com/${tabelogPref}/rstLst/?SrtT=rt&sort_mode=1`}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                style={{
+                  fontSize: 11, fontWeight: 700, padding: '5px 12px',
+                  background: 'linear-gradient(135deg,#c0392b,#e74c3c)',
+                  color: '#fff', borderRadius: 20, textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                🏆 {city.pref}のグルメランキング
+              </a>
+            )}
+          </div>
           <p style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 16 }}>食べログで近くのお店を探せます</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {city.gourmet.map((g, i) => (
