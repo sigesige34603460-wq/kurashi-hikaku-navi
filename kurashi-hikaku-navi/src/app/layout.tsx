@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
   title: 'くらし比較ナビ | 移住先の生活費・住みやすさを比較',
   description: '都市別の生活費・住みやすさを数値で比較。移住シミュレーターで月いくら節約できるかすぐわかります。総務省データ準拠。',
   keywords: '移住,生活費比較,住みやすさランキング,移住支援金,地方移住,引越し,節約',
+  verification: {
+    google: 'c46541acce6ab922',
+  },
 }
 
 export default function RootLayout({
@@ -22,20 +24,23 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
+        {/* Google Analytics — headに配置（Search Console認証に必要） */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-FPH2D8JQF1"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-FPH2D8JQF1');
+            `,
+          }}
+        />
       </head>
       <body>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-FPH2D8JQF1"
-          strategy="afterInteractive"
-        />
-        <Script id="ga4-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-FPH2D8JQF1');
-          `}
-        </Script>
         {children}
       </body>
     </html>
