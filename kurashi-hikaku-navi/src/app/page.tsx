@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Header from '@/components/Header'
 import Link from 'next/link'
 import { simCities, rankCities, whyData } from '@/data/cities'
+import { AFFILIATE } from '@/data/affiliateLinks'
 import styles from './page.module.css'
 
 const FROM_OPTIONS = [
@@ -240,6 +241,35 @@ export default function Home() {
                 <Link href={'/cities/' + to} className={styles.detailBtn}>
                   {result.toName}の詳細ページを見る →
                 </Link>
+                <div style={{ marginTop: 16, borderTop: '1px solid #e0e0e0', paddingTop: 14 }}>
+                  <p style={{ fontSize: 12, color: '#888', textAlign: 'center', marginBottom: 10 }}>移住の準備をはじめよう</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <a href={AFFILIATE.hikkoshi} target="_blank" rel="noopener noreferrer sponsored"
+                      style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#E8F5E9', border: '1px solid #81C784', borderRadius: 8, padding: '10px 14px', textDecoration: 'none' }}>
+                      <span style={{ fontSize: 20 }}>🚚</span>
+                      <div>
+                        <div style={{ fontSize: 12, fontWeight: 700, color: '#1B5E20' }}>引越し費用を最大50%節約</div>
+                        <div style={{ fontSize: 11, color: '#388E3C' }}>最大10社から無料一括見積もり →</div>
+                      </div>
+                    </a>
+                    <a href={AFFILIATE.chintai} target="_blank" rel="noopener noreferrer sponsored"
+                      style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#E3F2FD', border: '1px solid #90CAF9', borderRadius: 8, padding: '10px 14px', textDecoration: 'none' }}>
+                      <span style={{ fontSize: 20 }}>🏠</span>
+                      <div>
+                        <div style={{ fontSize: 12, fontWeight: 700, color: '#0D47A1' }}>移住先の賃貸物件を探す</div>
+                        <div style={{ fontSize: 11, color: '#1976D2' }}>全国の格安物件を一括検索 →</div>
+                      </div>
+                    </a>
+                    <a href={AFFILIATE.denki} target="_blank" rel="noopener noreferrer sponsored"
+                      style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#FFFDE7', border: '1px solid #FFD54F', borderRadius: 8, padding: '10px 14px', textDecoration: 'none' }}>
+                      <span style={{ fontSize: 20 }}>⚡</span>
+                      <div>
+                        <div style={{ fontSize: 12, fontWeight: 700, color: '#E65100' }}>電気・ガスをまとめて切り替え</div>
+                        <div style={{ fontSize: 11, color: '#BF360C' }}>移住先でお得なプランを比較 →</div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -318,12 +348,12 @@ export default function Home() {
         </section>
         <section style={{maxWidth:'480px',margin:'0 auto',padding:'0 16px 32px'}}>
           <p style={{fontSize:'13px',color:'#888',textAlign:'center',marginBottom:'10px'}}>移住準備に役立つサービス</p>
-          <a href="https://hikkoshi.suumo.jp/" target="_blank" rel="noopener noreferrer sponsored" style={{display:'block',background:'#E8F5E9',border:'1px solid #4CAF50',borderRadius:'10px',padding:'14px 16px',marginBottom:'10px',textDecoration:'none',color:'#222'}}>
+          <a href={AFFILIATE.hikkoshi} target="_blank" rel="noopener noreferrer sponsored" style={{display:'block',background:'#E8F5E9',border:'1px solid #4CAF50',borderRadius:'10px',padding:'14px 16px',marginBottom:'10px',textDecoration:'none',color:'#222'}}>
             <div style={{fontWeight:700,fontSize:'14px',marginBottom:'4px'}}>引越し費用を最大50%節約！</div>
             <div style={{fontSize:'12px',color:'#555',marginBottom:'8px'}}>SUUMO引越しで最大10社から一括見積もり。</div>
             <div style={{fontSize:'13px',fontWeight:600,color:'#1565C0'}}>無料で見積もりを比較する →</div>
           </a>
-          <a href="https://suumo.jp/chintai/" target="_blank" rel="noopener noreferrer sponsored" style={{display:'block',background:'#E3F2FD',border:'1px solid #2196F3',borderRadius:'10px',padding:'14px 16px',textDecoration:'none',color:'#222'}}>
+          <a href={AFFILIATE.chintai} target="_blank" rel="noopener noreferrer sponsored" style={{display:'block',background:'#E3F2FD',border:'1px solid #2196F3',borderRadius:'10px',padding:'14px 16px',textDecoration:'none',color:'#222'}}>
             <div style={{fontWeight:700,fontSize:'14px',marginBottom:'4px'}}>移住先の賃貸物件を探す</div>
             <div style={{fontSize:'12px',color:'#555',marginBottom:'8px'}}>全国の賃貸物件を検索。地方の格安物件も充実。</div>
             <div style={{fontSize:'13px',fontWeight:600,color:'#1565C0'}}>賃貸物件を検索する →</div>

@@ -1,6 +1,8 @@
 'use client'
 import { useState, useMemo } from 'react'
 import Header from '@/components/Header'
+import AffiliateBlock from '@/components/AffiliateBlock'
+import RakutenBlock from '@/components/RakutenBlock'
 import { subsidies, SubsidyTag, SubsidyLevel } from '@/data/subsidies'
 import styles from './page.module.css'
 
@@ -176,6 +178,13 @@ export default function Subsidies() {
               ))}
             </div>
           ))}
+        </div>
+
+        <div style={{ padding: '8px 0' }}>
+          <AffiliateBlock heading="支援金を活用して移住の準備をはじめよう" />
+        </div>
+        <div style={{ padding: '8px 0 0' }}>
+          <RakutenBlock />
         </div>
 
         <footer className={styles.footer}>

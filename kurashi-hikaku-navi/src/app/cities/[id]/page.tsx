@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { cityDetails } from '@/data/cityDetails'
 import { rankCities, whyData } from '@/data/cities'
+import AffiliateBlock from '@/components/AffiliateBlock'
+import RakutenBlock from '@/components/RakutenBlock'
 
 type Props = { params: { id: string } }
 
@@ -597,6 +599,10 @@ export default function CityPage({ params }: Props) {
             ))}
           </ul>
         </div>
+
+        {/* アフィリエイト */}
+        <AffiliateBlock heading={`${city.name}への移住を検討中なら`} />
+        <RakutenBlock />
 
         {/* CTA */}
         <div style={{
