@@ -1,0 +1,46 @@
+name: 毎日記事自動生成
+
+on:
+  schedule:
+    # 毎日午前1時（JST）= 16:00 UTC
+    - cron: '0 16 * * *'
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Node.js セットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: kurashi-hikaku-navi/package-lock.json
+
+      - name: 依存パッケージインストール
+        working-directory: kurashi-hikaku-navi
+        run: npm ci
+
+      - name: 記事生成
+        working-directory: kurashi-hikaku-navi
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-article.mjs
+
+      - name: 変更をコミット・プッシュ
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add kurashi-hikaku-navi/src/content/blog/
+          if git diff --cached --quiet; then
+            echo "新しい記事はありませんでした"
+          else
+            git commit -m "auto: 移住コラム記事を追加 $(date '+%Y-%m-%d')"
+            git push
+          fi
