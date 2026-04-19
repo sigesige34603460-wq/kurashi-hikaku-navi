@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import { cityDetails } from '@/data/cityDetails'
 import { rankCities } from '@/data/cities'
+import { AFFILIATE } from '@/data/affiliateLinks'
 
 export const metadata = {
   title: '移住支援金・補助金まとめ2024｜最大100万円もらえる制度完全ガイド | くらし比較ナビ',
@@ -111,7 +112,7 @@ export default function ShienkinPage() {
 
         {/* アフィリエイトCTA */}
         <div style={{ marginBottom: 28 }}>
-          <a href="https://hikkoshi.suumo.jp/" target="_blank" rel="noopener noreferrer sponsored"
+          <a href={AFFILIATE.hikkoshi} target="_blank" rel="noopener noreferrer sponsored"
             style={{ display: 'block', background: 'linear-gradient(135deg,#E8F5E9,#F1F8E9)', border: '1.5px solid #81C784', borderRadius: 'var(--radius-lg)', padding: '18px 20px', textDecoration: 'none' }}>
             <div style={{ fontSize: 11, color: '#2E7D32', fontWeight: 700, marginBottom: 4 }}>PR</div>
             <div style={{ fontSize: 15, fontWeight: 700, color: '#1B5E20', marginBottom: 4 }}>引越し費用も節約して移住をスタート</div>
@@ -158,7 +159,7 @@ export default function ShienkinPage() {
 
         {/* 賃貸CTA */}
         <div style={{ marginBottom: 28 }}>
-          <a href="https://suumo.jp/chintai/" target="_blank" rel="noopener noreferrer sponsored"
+          <a href={AFFILIATE.chintai} target="_blank" rel="noopener noreferrer sponsored"
             style={{ display: 'block', background: 'linear-gradient(135deg,#E3F2FD,#E8EAF6)', border: '1.5px solid #90CAF9', borderRadius: 'var(--radius-lg)', padding: '18px 20px', textDecoration: 'none' }}>
             <div style={{ fontSize: 11, color: '#1565C0', fontWeight: 700, marginBottom: 4 }}>PR</div>
             <div style={{ fontSize: 15, fontWeight: 700, color: '#0D47A1', marginBottom: 4 }}>移住先の賃貸物件を今すぐ検索</div>

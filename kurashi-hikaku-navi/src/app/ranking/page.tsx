@@ -1,6 +1,7 @@
 'use client'
 import { useState, useMemo } from 'react'
 import Header from '@/components/Header'
+import AffiliateBlock from '@/components/AffiliateBlock'
 import { rankCities, whyData } from '@/data/cities'
 import styles from './page.module.css'
 
@@ -167,6 +168,10 @@ export default function Ranking() {
               {b.label}
             </div>
           ))}
+        </div>
+
+        <div style={{ padding: '8px 0' }}>
+          <AffiliateBlock heading="移住先が決まったら次のステップへ" />
         </div>
 
         <footer className={styles.footer}>

@@ -24,6 +24,10 @@ export default function CityPage({ params }: Props) {
 
   // 公式サイトリンク（47都道府県）
   const officialSiteMap: Record<string, { city: string; pref: string }> = {
+    tokyo:     { city: 'https://www.metro.tokyo.lg.jp/',             pref: 'https://www.metro.tokyo.lg.jp/' },
+    kanagawa:  { city: 'https://www.city.yokohama.lg.jp/',           pref: 'https://www.pref.kanagawa.jp/' },
+    saitama:   { city: 'https://www.city.saitama.lg.jp/',            pref: 'https://www.pref.saitama.lg.jp/' },
+    osaka:     { city: 'https://www.city.osaka.lg.jp/',              pref: 'https://www.pref.osaka.lg.jp/' },
     hokkaido:  { city: 'https://www.city.sapporo.jp/',              pref: 'https://www.pref.hokkaido.lg.jp/' },
     aomori:    { city: 'https://www.city.aomori.aomori.jp/',        pref: 'https://www.pref.aomori.lg.jp/' },
     iwate:     { city: 'https://www.city.morioka.iwate.jp/',        pref: 'https://www.pref.iwate.jp/' },
@@ -72,6 +76,10 @@ export default function CityPage({ params }: Props) {
 
   // 食べログ 都道府県コード対応表（47都道府県）
   const tabelogPrefMap: Record<string, string> = {
+    tokyo:     'tokyo',
+    kanagawa:  'kanagawa',
+    saitama:   'saitama',
+    osaka:     'osaka',
     hokkaido:  'hokkaido',
     aomori:    'aomori',
     iwate:     'iwate',
@@ -118,6 +126,10 @@ export default function CityPage({ params }: Props) {
   }
   // ホットペッパー エリアコード（47都道府県）
   const hotpepperAreaMap: Record<string, string> = {
+    tokyo:     'SA13',
+    kanagawa:  'SA22',
+    saitama:   'SA15',
+    osaka:     'SA41',
     hokkaido:  'SA11',
     aomori:    'SA51',
     iwate:     'SA52',
@@ -164,6 +176,10 @@ export default function CityPage({ params }: Props) {
   }
   // じゃらん観光 都道府県コード（6桁）
   const jalanPrefMap: Record<string, string> = {
+    tokyo:     '130000',
+    kanagawa:  '140000',
+    saitama:   '110000',
+    osaka:     '270000',
     hokkaido:  '010000',
     aomori:    '020000',
     iwate:     '030000',

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Header from '@/components/Header'
 import { rankCities } from '@/data/cities'
+import { AFFILIATE } from '@/data/affiliateLinks'
 
 export const metadata = {
   title: '生活費が安い都道府県ランキング47選【2024年最新版】 | くらし比較ナビ',
@@ -106,7 +107,7 @@ export default function CostRankingPage() {
 
         {/* アフィリエイトCTA① */}
         <div style={{ marginBottom: 32 }}>
-          <a href="https://hikkoshi.suumo.jp/" target="_blank" rel="noopener noreferrer sponsored"
+          <a href={AFFILIATE.hikkoshi} target="_blank" rel="noopener noreferrer sponsored"
             style={{ display: 'block', background: 'linear-gradient(135deg,#E8F5E9,#F1F8E9)', border: '1.5px solid #81C784', borderRadius: 'var(--radius-lg)', padding: '18px 20px', textDecoration: 'none' }}>
             <div style={{ fontSize: 11, color: '#2E7D32', fontWeight: 700, marginBottom: 4 }}>PR</div>
             <div style={{ fontSize: 15, fontWeight: 700, color: '#1B5E20', marginBottom: 4 }}>移住の引越し費用を最大50%節約しよう</div>
@@ -167,7 +168,7 @@ export default function CostRankingPage() {
 
         {/* アフィリエイトCTA② */}
         <div style={{ marginBottom: 32 }}>
-          <a href="https://suumo.jp/chintai/" target="_blank" rel="noopener noreferrer sponsored"
+          <a href={AFFILIATE.chintai} target="_blank" rel="noopener noreferrer sponsored"
             style={{ display: 'block', background: 'linear-gradient(135deg,#E3F2FD,#E8EAF6)', border: '1.5px solid #90CAF9', borderRadius: 'var(--radius-lg)', padding: '18px 20px', textDecoration: 'none' }}>
             <div style={{ fontSize: 11, color: '#1565C0', fontWeight: 700, marginBottom: 4 }}>PR</div>
             <div style={{ fontSize: 15, fontWeight: 700, color: '#0D47A1', marginBottom: 4 }}>移住先の賃貸物件を今すぐ検索</div>

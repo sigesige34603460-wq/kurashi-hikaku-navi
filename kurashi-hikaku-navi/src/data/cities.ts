@@ -137,9 +137,38 @@ export const rankCities: RankCity[] = [
   { id: 'miyazaki',  name: '宮崎市',   pref: '宮崎県',   cost: 92, conv: 55, nat: 88, med: 65 },
   { id: 'kagoshima', name: '鹿児島市', pref: '鹿児島県', cost: 87, conv: 60, nat: 85, med: 63 },
   { id: 'okinawa',   name: '那覇市',   pref: '沖縄県',   cost: 80, conv: 65, nat: 90, med: 68 },
+  // 大都市圏
+  { id: 'tokyo',     name: '東京都',   pref: '東京都',   cost: 30, conv: 98, nat: 40, med: 95 },
+  { id: 'kanagawa',  name: '横浜市',   pref: '神奈川県', cost: 42, conv: 90, nat: 62, med: 88 },
+  { id: 'saitama',   name: 'さいたま市', pref: '埼玉県', cost: 55, conv: 85, nat: 55, med: 82 },
+  { id: 'osaka',     name: '大阪市',   pref: '大阪府',   cost: 52, conv: 92, nat: 42, med: 90 },
 ]
 
 export const whyData: Record<string, WhyPoint[]> = {
+  tokyo: [
+    { icon: 'conv', title: '国内最高峰の交通利便性', desc: '山手線・地下鉄・新幹線が集中。国内どこへでも最速アクセスが可能です。' },
+    { icon: 'med',  title: '医療機関が圧倒的に充実', desc: '大学病院・専門病院が集中し、最高水準の医療が身近に受けられます。' },
+    { icon: 'conv', title: '就職・転職の選択肢が最多', desc: '国内企業の本社・外資系が集中し、キャリアの選択肢が最も広い都市です。' },
+    { icon: 'nat',  title: '奥多摩・高尾山が都内に', desc: '都内に奥多摩・高尾山などの自然が残り、週末のハイキングも楽しめます。' },
+  ],
+  kanagawa: [
+    { icon: 'conv', title: '東京へ30〜50分のアクセス', desc: '横浜・川崎から東京都心へ通勤圏内。都市機能を享受しながら生活コストを抑えられます。' },
+    { icon: 'nat',  title: '海・山・温泉が身近', desc: '三浦海岸・江の島・箱根温泉が通勤圏内。休日のリフレッシュ環境が充実しています。' },
+    { icon: 'med',  title: '横浜市大・聖マリアンナなど医療充実', desc: '高度医療機関が多く、東京に次ぐ医療水準を誇ります。' },
+    { icon: 'cost', title: '東京より家賃が安い', desc: '東京比で平均家賃が約15%安く、同じ予算でより広い部屋に住めます。' },
+  ],
+  saitama: [
+    { icon: 'conv', title: '東京へ15〜40分で通勤可能', desc: '大宮・浦和から東京まで最短15分。東京に近い利便性を持ちながら生活費を抑えられます。' },
+    { icon: 'cost', title: '東京比で家賃が大幅に安い', desc: '都内比で家賃約35%安。広い部屋に住みながら貯蓄を増やせます。' },
+    { icon: 'nat',  title: '秩父・荒川の自然が近い', desc: '秩父の山々や荒川サイクリングロードなど、都心近郊で豊かな自然を楽しめます。' },
+    { icon: 'med',  title: '埼玉医大・自治医大など充実', desc: '埼玉医科大学病院など高度医療機関があり、安心の医療環境です。' },
+  ],
+  osaka: [
+    { icon: 'conv', title: '西日本最大の交通ハブ', desc: '新幹線・地下鉄・私鉄が集中。関西一円へのアクセスが抜群です。' },
+    { icon: 'cost', title: '東京より生活費が安い', desc: '家賃は東京比で約30%安。食の安さも有名で、外食費を大幅に節約できます。' },
+    { icon: 'med',  title: '阪大・近大病院など医療が充実', desc: '大阪大学医学部附属病院など高度医療機関が充実しています。' },
+    { icon: 'conv', title: '関西文化・グルメの中心地', desc: 'たこ焼き・お好み焼き・串カツなど食文化が豊か。人情味ある街の雰囲気が魅力です。' },
+  ],
   aichi: [
     { icon: 'conv', title: '交通アクセスが日本最高水準', desc: '名古屋は新幹線・地下鉄・JR・近鉄が集中。東京・大阪いずれも1時間圏内でビジネスに便利。' },
     { icon: 'med',  title: '医療・大学病院が充実', desc: '名古屋大学病院をはじめ高度医療機関が多く、安心して暮らせる医療環境です。' },

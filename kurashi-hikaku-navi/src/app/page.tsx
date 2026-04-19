@@ -72,6 +72,9 @@ const TO_OPTIONS = [
   { value: 'yamagata',  label: '山形県（山形市）',   region: '北海道・東北' },
   { value: 'fukushima', label: '福島県（福島市）',   region: '北海道・東北' },
   // 関東
+  { value: 'tokyo',     label: '東京都',             region: '関東' },
+  { value: 'kanagawa',  label: '神奈川県（横浜市）', region: '関東' },
+  { value: 'saitama',   label: '埼玉県（さいたま市）', region: '関東' },
   { value: 'ibaraki',   label: '茨城県（水戸市）',   region: '関東' },
   { value: 'tochigi',   label: '栃木県（宇都宮市）', region: '関東' },
   { value: 'maebashi',  label: '群馬県（前橋市）',   region: '関東' },
@@ -88,6 +91,7 @@ const TO_OPTIONS = [
   { value: 'aichi',     label: '愛知県（名古屋市）', region: '中部' },
   { value: 'mie',       label: '三重県（津市）',     region: '中部' },
   // 近畿
+  { value: 'osaka',     label: '大阪府（大阪市）',   region: '近畿' },
   { value: 'shiga',     label: '滋賀県（大津市）',   region: '近畿' },
   { value: 'kyoto',     label: '京都府（京都市）',   region: '近畿' },
   { value: 'hyogo',     label: '兵庫県（神戸市）',   region: '近畿' },
