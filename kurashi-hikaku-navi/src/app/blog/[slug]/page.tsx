@@ -33,6 +33,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
+// slug → cityId フォールバックマップ（cityIdフロントマターがない既存記事用）
+const SLUG_TO_CITY: Record<string, string> = {
+  'akita':           'akita',
+  'yamanashi-kofu':  'yamanashi',
+  'mie-tsu':         'mie',
+  'nagano-iju-guide':'nagano',
+}
+
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const filePath = path.join(CONTENT_DIR, `${params.slug}.md`)
   if (!fs.existsSync(filePath)) notFound()
@@ -41,6 +49,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   const { data, content } = matter(raw)
   const processed = await remark().use(remarkHtml).process(content)
   const html = processed.toString()
+
+  // slugからdate部分を除いた部分でcityIdを解決
+  const bareSlug = params.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')
+  const cityId: string | undefined = data.cityId ?? SLUG_TO_CITY[bareSlug] ?? SLUG_TO_CITY[params.slug]
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--green-pale)' }}>
@@ -90,6 +102,35 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             color: 'var(--text)',
           }}
         />
+
+        {/* 都市詳細ページCTA */}
+        {cityId && (
+          <section style={{
+            background: 'linear-gradient(135deg, var(--green-pale) 0%, #e8f5e9 100%)',
+            border: '2px solid rgba(45,106,79,0.25)',
+            borderRadius: 'var(--radius-xl)',
+            padding: '24px 20px',
+            textAlign: 'center',
+            marginBottom: 20,
+          }}>
+            <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 6 }}>この記事の都市をもっと詳しく</p>
+            <h3 style={{ fontSize: 17, fontWeight: 800, color: 'var(--green-dark)', marginBottom: 16 }}>
+              {data.title?.split('への')[0]} の住みやすさ・補助金・グルメを見る
+            </h3>
+            <Link href={`/cities/${cityId}`} style={{
+              display: 'inline-block',
+              background: 'linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%)',
+              color: '#fff',
+              fontWeight: 800, fontSize: 14,
+              padding: '12px 28px',
+              borderRadius: 'var(--radius-md)',
+              textDecoration: 'none',
+              boxShadow: '0 4px 12px rgba(45,106,79,0.3)',
+            }}>
+              詳細ページを見る →
+            </Link>
+          </section>
+        )}
 
         {/* アフィリエイト */}
         <div style={{ marginBottom: 20 }}>
