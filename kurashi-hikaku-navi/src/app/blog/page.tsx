@@ -44,7 +44,9 @@ function getMarkdownArticles() {
         slug: filename.replace(/\.md$/, ''),
         title: data.title ?? '',
         description: data.description ?? '',
-        date: data.date ? String(data.date).slice(0, 10) : '',
+        date: data.date instanceof Date
+          ? data.date.toISOString().slice(0, 10)
+          : String(data.date).slice(0, 10),
         category: data.category ?? 'コラム',
         isStatic: false,
       }
