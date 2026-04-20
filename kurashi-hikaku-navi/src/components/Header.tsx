@@ -20,7 +20,7 @@ export default function Header() {
         <Link href="/" className={pathname === '/' ? styles.active : ''}>比較する</Link>
         <Link href="/ranking" className={pathname === '/ranking' ? styles.active : ''}>ランキング</Link>
         <Link href="/subsidies" className={pathname === '/subsidies' ? styles.active : ''}>支援金</Link>
-        <Link href="/blog/cost-ranking" className={pathname?.startsWith('/blog') ? styles.active : ''}>コラム</Link>
+        <Link href="/blog" className={pathname?.startsWith('/blog') ? styles.active : ''}>コラム</Link>
       </nav>
     </header>
   )
