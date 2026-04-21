@@ -363,6 +363,29 @@ export default function Home() {
             <div style={{fontSize:'13px',fontWeight:600,color:'#1565C0'}}>賃貸物件を検索する →</div>
           </a>
         </section>
+        {/* コラムCTA */}
+        <section style={{ maxWidth: '480px', margin: '0 auto', padding: '0 16px 32px' }}>
+          <div style={{ background: 'var(--white)', border: '1.5px solid var(--border)', borderRadius: 'var(--radius-xl)', padding: '20px' }}>
+            <h2 style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text)', marginBottom: '12px' }}>📝 移住・くらしコラム</h2>
+            <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '14px', lineHeight: 1.7 }}>
+              生活費・支援金・各都道府県の移住ガイドなど、移住準備に役立つ情報を毎日更新中。
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '14px' }}>
+              {[
+                '生活費が安い都道府県ランキング47選',
+                '移住支援金・補助金まとめ｜最大100万円',
+                '東京から移住したら月いくら節約できる？',
+              ].map((title, i) => (
+                <div key={i} style={{ fontSize: '12px', color: 'var(--text)', padding: '6px 10px', background: 'var(--green-pale)', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ color: 'var(--green-dark)', flexShrink: 0 }}>✓</span>{title}
+                </div>
+              ))}
+            </div>
+            <Link href="/blog" style={{ display: 'block', textAlign: 'center', background: 'linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%)', color: '#fff', fontWeight: 700, fontSize: '13px', padding: '11px', borderRadius: 'var(--radius-md)', textDecoration: 'none' }}>
+              コラム記事をすべて見る →
+            </Link>
+          </div>
+        </section>
       </main>
       <footer className={styles.footer}>
         データ出典：総務省「消費者物価地域差指数」「家計調査」· © 2025 くらし比較ナビ
