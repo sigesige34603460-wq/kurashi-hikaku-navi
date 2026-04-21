@@ -228,9 +228,9 @@ export default function CityPage({ params }: Props) {
   const hotpepperArea = hotpepperAreaMap[params.id]  ?? ''
   const jalanPref     = jalanPrefMap[params.id]      ?? ''
 
-  // じゃらん観光ランキングURL（都道府県別）
+  // じゃらん観光URL（都道府県別）
   const jalanRankingUrl = jalanPref
-    ? `https://www.jalan.net/kankou/spt_${jalanPref}/ranking/`
+    ? `https://www.jalan.net/kankou/${jalanPref}/`
     : ''
 
   // 料理名から食べログのジャンルコードを自動判定
